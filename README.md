@@ -19,7 +19,8 @@ yarn
 [https://yarnpkg.com/en/docs/install](https://yarnpkg.com/en/docs/install)
 
 yarn install  
-react-native run-ios  
+react-native link  
+react-native run-ios    
 react-native run-android
 
 ## Used Node Library 
