@@ -15,8 +15,10 @@ import {
 
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
+import HTMLView from 'react-native-htmlview';
 
 import theme from './util/theme';
+import openBrowser from './util/openBrowser';
 import I18n from './util/i18n';
 
 import Spinner from './components/Spinner';
@@ -138,25 +140,25 @@ const styles = StyleSheet.create({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
-
 const Twoot = (props) => {
   const style = StyleSheet.create({
-    twoot: {
+    a: {
+      fontWeight: '300',
+      color: theme.color.tint,
+    },
+    p: {
+      color: 'white',
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: theme.color.tint,
     },
-    content: {
-      color: 'white',
-    }
   });
-  // console.log(props.twoot)
-      // onPress={() => Actions.twoot({ twoot: props.twoot })}
   return (
-    <TouchableHighlight underlayColor="#EABA07"
-      style={style.twoot}
-    >
-      <Text style={style.content}>{props.twoot.content}</Text>
-    </TouchableHighlight>
+    <HTMLView
+      value={props.twoot.content}
+      onLinkPress={(url) => openBrowser(url)}
+      stylesheet={style}
+    />
   );
 };
+

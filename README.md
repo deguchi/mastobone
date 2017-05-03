@@ -48,6 +48,9 @@ react-native-spinkit
 react-native-i18n  
 [https://github.com/AlexanderZaytsev/react-native-i18n](https://github.com/AlexanderZaytsev/react-native-i18n)
 
+react-native-htmlview  
+[https://github.com/jsdf/react-native-htmlview](https://github.com/jsdf/react-native-htmlview)
+
 ## License
 
 GNU AGPL v3
