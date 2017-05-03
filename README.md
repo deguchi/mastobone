@@ -45,6 +45,8 @@ react-native-vector-icons
 react-native-spinkit  
 [https://github.com/maxs15/react-native-spinkit](https://github.com/maxs15/react-native-spinkit)
 
+react-native-i18n
+[https://github.com/AlexanderZaytsev/react-native-i18n](https://github.com/AlexanderZaytsev/react-native-i18n)
 
 ## License
 
