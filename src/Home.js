@@ -10,6 +10,7 @@ import {
   View,
   TouchableHighlight,
   ListView,
+  RefreshControl,
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -19,6 +20,7 @@ import theme from './util/theme';
 import I18n from './util/i18n';
 
 import Spinner from './components/Spinner';
+import ContainerStyle from './components/ContainerStyle';
 
 import {
   initializeAPI,
@@ -44,6 +46,7 @@ class Home extends Component {
     this.state = {
       username: null,
       timeline: null,
+      refreshing: false,
     };
   }
   _logout () {
@@ -61,7 +64,7 @@ class Home extends Component {
     this.props.api.getCurrentAccount().then((resp) => {
       console.log(resp);
       if (!resp.status) {
-        this.setState({username: resp.username});
+        this.setState({username: resp.username, refreshing: false});
       } else if (resp.status===401) {
         this._logout();
       }
@@ -74,6 +77,10 @@ class Home extends Component {
       }
     });
   }
+  _onRefresh() {
+    this.setState({refreshing: true});
+    this._fetch();
+  }
   render() {
     // console.log(this.props)
     return (
@@ -83,7 +90,13 @@ class Home extends Component {
             return <ListView
               dataSource={this.state.timeline}
               renderRow={(twoot) => <Twoot twoot={twoot} />}
-              style={styles.timeline}
+              style={[styles.timeline, ContainerStyle]}
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.refreshing}
+                  onRefresh={this._onRefresh.bind(this)}
+                />
+              }
             />;
           } else if (this.state.username) {
             return (

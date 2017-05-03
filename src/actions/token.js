@@ -15,7 +15,7 @@ const getToken = () => {
 const setToken = (username, domain, value) => {
   return (dispatch, getState) => {
     const state = getState();
-    return AsyncStorage.setItem(state.currentUser, JSON.stringify(value)).then(()=>{
+    return AsyncStorage.setItem(state.currentUser, value).then(()=>{
       dispatch(Success(value));
     }).catch((error)=>{
       console.log('AsyncStorage error: ' + error.message);
