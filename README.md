@@ -4,7 +4,7 @@ Mastodon client app barebone for iOS and Android.
 
 ## ScreenShot
 
-![ScreenShot](https://yabumi.cc/15bc735d30e20396ad6e906a.png "ScreenShot")
+![ScreenShot](https://yabumi.cc/15bcca34fc46e2a60711127e.png "ScreenShot")
 
 ## Todo
 
