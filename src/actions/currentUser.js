@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 
 const getCurrentUser = (onComplete: ?() => void) => {
   return async (dispatch, getState) => {
+    // AsyncStorage.clear();
     return AsyncStorage.getItem('current_user').then((value)=>{
       dispatch(Success(value));
       if (onComplete) onComplete();

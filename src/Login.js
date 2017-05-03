@@ -20,6 +20,7 @@ import {
   initializeAPI,
   getToken,
   setToken,
+  getCurrentUser,
   setCurrentUser,
 } from './actions'
 
@@ -38,6 +39,9 @@ const mapDispatchToProps = dispatch => ({
   setToken (username, domain, token) {
     return dispatch(setToken(username, domain, token))
   },
+  getCurrentUser () {
+    return dispatch(getCurrentUser())
+  },
   setCurrentUser (username, domain) {
     return dispatch(setCurrentUser(username, domain))
   },
@@ -55,7 +59,13 @@ class Login extends Component {
       authorizationCode: null,
       domain: '',
     };
-    this.props.getToken();
+    this.init();
+  }
+  async init() {
+    await this.props.getCurrentUser();
+    if (this.props.currentUser) {
+      this.props.getToken();
+    }
   }
   async login() {
     // console.log(this.state.domain)
@@ -81,8 +91,8 @@ class Login extends Component {
           username = resp.username;
         }
       });
-      await this.props.setToken(username, this.state.domain, token);
       await this.props.setCurrentUser(username, this.state.domain);
+      await this.props.setToken(token);
       Actions.main();
     }
   }

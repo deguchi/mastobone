@@ -103,15 +103,19 @@ class App extends Component {
   async componentDidMount() {
     // console.log(this.props.token)
     await this.props.getCurrentUser();
-    await this.props.getToken(this.props.currentUser);
-    this.setState({loading: false});
-    if(this.props.token) {
-      // todo: アプリ設定の共通化
-      // console.log(this.props.currentUser.split('@')[1])
-      await this.props.initializeAPI(this.props.currentUser.split('@')[1], 'read write follow', 'Mastobone');
-      // console.log(this.props.api)
-      this.props.api.setToken(this.props.token);
-      Actions.main();
+    if (this.props.currentUser) {
+      await this.props.getToken(this.props.currentUser);
+      this.setState({loading: false});
+      if(this.props.token) {
+        // todo: アプリ設定の共通化
+        // console.log(this.props.currentUser.split('@')[1])
+        await this.props.initializeAPI(this.props.currentUser.split('@')[1], 'read write follow', 'Mastobone');
+        // console.log(this.props.api)
+        this.props.api.setToken(this.props.token);
+        Actions.main();
+      }
+    } else {
+      this.setState({loading: false});
     }
   }
   logout () {

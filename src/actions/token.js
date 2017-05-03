@@ -12,7 +12,7 @@ const getToken = () => {
   }
 };
 
-const setToken = (username, domain, value) => {
+const setToken = (value) => {
   return (dispatch, getState) => {
     const state = getState();
     return AsyncStorage.setItem(state.currentUser, value).then(()=>{
@@ -25,7 +25,7 @@ const setToken = (username, domain, value) => {
 };
 
 
-const removeToken = (value) => {
+const removeToken = () => {
   return async (dispatch, getState) => {
     const state = getState();
     return AsyncStorage.removeItem(state.currentUser).then(()=>{
