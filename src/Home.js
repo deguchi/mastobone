@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  Image,
   TouchableHighlight,
   ListView,
   RefreshControl,
@@ -144,6 +145,7 @@ const Twoot = (props) => {
   const style = StyleSheet.create({
     container: {
       flex: 1,
+      flexDirection: 'row',
       padding: 10,
       borderBottomWidth: 1,
       borderBottomColor: theme.color.gray,
@@ -156,14 +158,28 @@ const Twoot = (props) => {
     p: {
       color: 'white',
     },
+    icon: {
+      width: 50,
+      height: 50,
+    },
+    username: {
+      color: 'white',
+    },
+    body: {
+      marginLeft: 10,
+    }
   });
   return (
     <View style={style.container}>
-      <HTMLView
-        value={props.twoot.content}
-        onLinkPress={(url) => openBrowser(url)}
-        stylesheet={style}
-      />
+      <Image source={{uri: props.twoot.account.avatar_static}} style={style.icon} />
+      <View style={style.body}>
+        <Text style={style.username}>{props.twoot.account.username}</Text>
+        <HTMLView
+          value={props.twoot.content}
+          onLinkPress={(url) => openBrowser(url)}
+          stylesheet={style}
+        />
+      </View>
     </View>
   );
 };
