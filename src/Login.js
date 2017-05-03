@@ -68,7 +68,7 @@ class Login extends Component {
       let username;
       await this.props.api.setToken(token);
       await this.props.api.getCurrentAccount().then((resp) => {
-        console.log(resp);
+        // console.log(resp);
         if (!resp.status) {
           username = resp.username;
         }

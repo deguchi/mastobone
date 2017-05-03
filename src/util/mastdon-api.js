@@ -86,8 +86,9 @@ export default class MastodonAPI {
       });
     });
   }
-  _request(path) {
+  _request(path, method='GET') {
     return fetch(this.baseUrl + path, {
+      method: method,
       headers: {
         Authorization: `Bearer ${this.token}`
       }
