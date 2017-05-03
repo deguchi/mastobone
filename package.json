@@ -10,6 +10,7 @@
 		"querystring": "^0.2.0",
 		"react": "16.0.0-alpha.6",
 		"react-native": "0.44.0",
+		"react-native-i18n": "^1.0.0",
 		"react-native-router-flux": "^3.38.1",
 		"react-native-safari-view": "^2.0.0",
 		"react-native-spinkit": "^1.0.2",

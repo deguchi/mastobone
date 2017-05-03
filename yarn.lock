@@ -3044,6 +3044,10 @@ react-native-experimental-navigation@0.26.x:
     fbjs "^0.8.1"
     react-addons-pure-render-mixin "^15.0.2"
 
+react-native-i18n@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-i18n/-/react-native-i18n-1.0.0.tgz#0c407d9ebb846aae1aa5e05de6503008553f02fd"
+
 react-native-router-flux@^3.38.1:
   version "3.38.1"
   resolved "https://registry.yarnpkg.com/react-native-router-flux/-/react-native-router-flux-3.38.1.tgz#333b1d447285f8d8c9ea0918e1d3761712af3426"

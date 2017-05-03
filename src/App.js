@@ -21,6 +21,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 
 import theme from './util/theme';
+import I18n from './util/i18n';
 
 import Login from './Login';
 import Home from './Home';
@@ -96,9 +97,9 @@ class App extends Component {
         titleStyle={styles.navTitle}
       >
         <Scene key='root'>
-          <Scene key='login' hideNavBar={true} component={Login} title='Login' initial={true} />
+          <Scene key='login' hideNavBar={true} component={Login} title={I18n.t('Login')} initial={true} />
           <Scene key='main' tabs={true} tabBarIconContainerStyle={styles.iconContainer} tabBarSelectedItemStyle={styles.iconContainerSelected} tabBarStyle={styles.bar} type={ActionConst.REPLACE}>
-            <Scene key='home' size={30} sceneStyle={styles.scene} title='Home' iconName='home' icon={TabIcon} component={Home} initial={true}  renderRightButton={() => {
+            <Scene key='home' size={30} sceneStyle={styles.scene} title={I18n.t('Home')} iconName='home' icon={TabIcon} component={Home} initial={true}  renderRightButton={() => {
               return <IconIonicons name="md-exit" size={24} color={theme.color.tint} style={{ marginRight: 5 }} onPress={this.logout.bind(this)} />
             }} />
           </Scene>
@@ -108,4 +109,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);
