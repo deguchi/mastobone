@@ -16,6 +16,7 @@ import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
 
 import theme from './util/theme';
+import I18n from './util/i18n';
 
 import Spinner from './components/Spinner';
 
@@ -87,7 +88,7 @@ class Home extends Component {
           } else if (this.state.username) {
             return (
               <Text style={styles.instructions}>
-                Welcome {this.state.username}
+                {I18n.t('Welcome')} {this.state.username}
               </Text>
             );
           } else {

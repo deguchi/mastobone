@@ -9,10 +9,14 @@ I18n.fallbacks = true
 
 I18n.translations = {
   en: {
-    Home: 'Home'
+    Home: 'Home',
+    Login: 'Home',
+    Welcome: 'Welcome',
   },
   ja: {
-    Home: 'ホーム'
+    Home: 'ホーム',
+    Login: 'ログイン',
+    Welcome: 'ようこそ',
   }
 };
 
