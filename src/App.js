@@ -1,8 +1,4 @@
 /**
- * Mastodon React Native
- * Copyright (c) 2017 Satoshi Deguchi
- * This software is released under GNU AGPL v3.
- * http://www.gnu.org/licenses/agpl.html
  * @flow
  */
 

@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 import React, { Component } from 'react';
 import { createStore, applyMiddleware, compose } from 'redux';
 import { AsyncStorage } from 'react-native';
