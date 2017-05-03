@@ -92,9 +92,11 @@ class App extends Component {
     };
   }
   componentDidMount() {
-    this.props.getToken().then((token) => {
+    this.props.getToken().then(() => {
       this.setState({loading: false});
+      console.log(this.props.token)
       if(this.props.token) {
+        this.props.api.setToken(this.props.token);
         Actions.main();
       }
     });
@@ -105,7 +107,7 @@ class App extends Component {
     });
   }
   render () {
-    console.log(this.props)
+    // console.log(this.props)
     if (this.state.loading) {
       return (<View style={{flex:1, backgroundColor: theme.color.bg}}>
         <Spinner error={false} />

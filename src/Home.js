@@ -52,27 +52,27 @@ class Home extends Component {
     });
   }
   componentDidMount() {
-    this._fetch();
+    if (this.props.token) {
+      this._fetch();
+    }
   }
   _fetch() {
-    if (this.props.token) {
-      this.props.api.setToken(this.props.token);
-      this.props.api.getCurrentAccount().then((resp) => {
-        // console.log(resp);
-        if (!resp.status) {
-          this.setState({username: resp.username});
-        } else if (resp.status===401) {
-          this._logout();
-        }
-      });
-      this.props.api.getTimeline().then((resp) => {
-        console.log(resp);
-        if (!resp.status) {
-          let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-          this.setState({timeline: ds.cloneWithRows(resp)});
-        }
-      });
-    }
+    console.log(this.props.api.token)
+    this.props.api.getCurrentAccount().then((resp) => {
+      console.log(resp);
+      if (!resp.status) {
+        this.setState({username: resp.username});
+      } else if (resp.status===401) {
+        this._logout();
+      }
+    });
+    this.props.api.getTimeline().then((resp) => {
+      console.log(resp);
+      if (!resp.status) {
+        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+        this.setState({timeline: ds.cloneWithRows(resp)});
+      }
+    });
   }
   render() {
     // console.log(this.props)

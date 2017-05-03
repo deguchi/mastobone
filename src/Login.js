@@ -33,8 +33,8 @@ const mapDispatchToProps = dispatch => ({
   getToken () {
     return dispatch(getToken())
   },
-  setToken (token) {
-    return dispatch(setToken(token))
+  setToken (username, domain, token) {
+    return dispatch(setToken(username, domain, token))
   },
 });
 
@@ -65,13 +65,22 @@ class Login extends Component {
     if(url.match(/\/oauth\/authorize\/(.*)/)) {
       // console.log(RegExp.$1);
       const token = await this.props.api.getToken(RegExp.$1);
-      this.props.setToken(token).then(() => {
+      let username;
+      await this.props.api.setToken(token);
+      await this.props.api.getCurrentAccount().then((resp) => {
+        console.log(resp);
+        if (!resp.status) {
+          username = resp.username;
+        }
+      });
+      // Todo: domain
+      this.props.setToken(username, 'bookn.me', token).then(() => {
         Actions.main();
       });
     }
   }
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <View style={styles.container}>
         <TouchableHighlight onPress={this.login.bind(this)}>
