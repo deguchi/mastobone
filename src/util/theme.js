@@ -10,9 +10,8 @@ const size = {
 const color = {
   tint: '#2b90d9',
   bg: '#282c37',
+  gray: '#707B97',
   darkText: '#484848',
-  lightGray: '#f7f7f7',
-  gray: '#95989A',
 };
 
 const font = {

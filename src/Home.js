@@ -142,23 +142,29 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
 const Twoot = (props) => {
   const style = StyleSheet.create({
-    a: {
-      fontWeight: '300',
+    container: {
+      flex: 1,
+      padding: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: theme.color.gray,
+      minHeight: 60,
+    },
+    span: {
       color: theme.color.tint,
+      // color: 'white',
     },
     p: {
       color: 'white',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: theme.color.tint,
     },
   });
   return (
-    <HTMLView
-      value={props.twoot.content}
-      onLinkPress={(url) => openBrowser(url)}
-      stylesheet={style}
-    />
+    <View style={style.container}>
+      <HTMLView
+        value={props.twoot.content}
+        onLinkPress={(url) => openBrowser(url)}
+        stylesheet={style}
+      />
+    </View>
   );
 };
 
