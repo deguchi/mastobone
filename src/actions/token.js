@@ -1,31 +1,21 @@
 import { AsyncStorage } from 'react-native';
 
-const getToken = (onComplete: ?() => void) => {
+const getToken = () => {
   return async (dispatch, getState) => {
-    let current_user;
-    // AsyncStorage.clear();
-    await AsyncStorage.getItem('current_user').then((cu) => {
-      current_user = cu;
+    const state = getState();
+    return AsyncStorage.getItem(state.currentUser).then((value)=>{
+      dispatch(Success(value));
+    }).catch((error)=>{
+      console.log('AsyncStorage error: ' + error.message);
+      dispatch(Error(error));
     });
-    // console.log(current_user)
-    if (current_user === null) {
-      return dispatch(Success(null));
-    } else {
-      return AsyncStorage.getItem(current_user).then((value)=>{
-        dispatch(Success(JSON.parse(value)));
-        if (onComplete) onComplete();
-      }).catch((error)=>{
-        console.log('AsyncStorage error: ' + error.message);
-        dispatch(Error(error));
-      });
-    }
   }
 };
 
 const setToken = (username, domain, value) => {
   return (dispatch, getState) => {
-    AsyncStorage.setItem('current_user', `${username}@${domain}`);
-    return AsyncStorage.setItem(`${username}@${domain}`, JSON.stringify(value)).then(()=>{
+    const state = getState();
+    return AsyncStorage.setItem(state.currentUser, JSON.stringify(value)).then(()=>{
       dispatch(Success(value));
     }).catch((error)=>{
       console.log('AsyncStorage error: ' + error.message);
@@ -36,8 +26,9 @@ const setToken = (username, domain, value) => {
 
 
 const removeToken = (value) => {
-  return (dispatch, getState) => {
-    return AsyncStorage.removeItem('token').then(()=>{
+  return async (dispatch, getState) => {
+    const state = getState();
+    return AsyncStorage.removeItem(state.currentUser).then(()=>{
       dispatch(Success(null));
     }).catch((error)=>{
       console.log('AsyncStorage error: ' + error.message);

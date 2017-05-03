@@ -8,6 +8,7 @@ import {
   View,
   TouchableHighlight,
   WebView,
+  TextInput,
 } from 'react-native';
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
@@ -19,6 +20,7 @@ import {
   initializeAPI,
   getToken,
   setToken,
+  setCurrentUser,
 } from './actions'
 
 const mapStateToProps = store => ({
@@ -27,14 +29,17 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  initializeAPI (baseUrl, scopes, clientName) {
-    return dispatch(initializeAPI(baseUrl, scopes, clientName))
+  initializeAPI (domain, scopes, clientName) {
+    return dispatch(initializeAPI(domain, scopes, clientName))
   },
   getToken () {
     return dispatch(getToken())
   },
   setToken (username, domain, token) {
     return dispatch(setToken(username, domain, token))
+  },
+  setCurrentUser (username, domain) {
+    return dispatch(setCurrentUser(username, domain))
   },
 });
 
@@ -43,22 +48,25 @@ class Login extends Component {
     super(props);
     this.state = {
       url: null,
-      baseUrl: 'https://bookn.me',
-      clientName: 'mastdon',
+      clientName: 'Mastobone', // Todo: change your app name
       scopes: 'read write follow',
       clientId: null,
       clientSecret: null,
       authorizationCode: null,
+      domain: '',
     };
     this.props.getToken();
-    this.props.initializeAPI(this.state.baseUrl, this.state.scopes, this.state.clientName);
   }
   async login() {
+    // console.log(this.state.domain)
     // console.log(this.props.api)
-    await this.props.api.createOAuthApp()
-    await this.props.api.getAuthorizationUrl().then((url) => {
-      this.setState({url: url});
-    });
+    if (this.state.domain !== '') {
+      await this.props.initializeAPI(this.state.domain, this.state.scopes, this.state.clientName);
+      await this.props.api.createOAuthApp();
+      await this.props.api.getAuthorizationUrl().then((url) => {
+        this.setState({url: url});
+      });
+    }
   }
   async getAuthorizationCode(url) {
     // console.log(url)
@@ -73,19 +81,15 @@ class Login extends Component {
           username = resp.username;
         }
       });
-      // Todo: domain
-      this.props.setToken(username, 'bookn.me', token).then(() => {
-        Actions.main();
-      });
+      await this.props.setToken(username, this.state.domain, token);
+      await this.props.setCurrentUser(username, this.state.domain);
+      Actions.main();
     }
   }
   render() {
     // console.log(this.props);
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.login.bind(this)}>
-          <Text style={styles.instructions}>Login</Text>
-        </TouchableHighlight>
         {(() => {
           if (this.state.url) {
             return (<WebView
@@ -93,6 +97,18 @@ class Login extends Component {
               style={{marginTop: 20, width: 400, height: 750}}
               onLoad={(event) => this.getAuthorizationCode(event.nativeEvent.url)}
             />);
+          } else {
+            return (<View style={styles.container}>
+              <TextInput style={styles.textInput} placeholder={'Enter instance domain'}
+                onChangeText={(value) => this.setState({domain: value})}
+                autoCapitalize="none"
+                autoFocus={true}
+                autoCorrect={false}
+              />
+              <TouchableHighlight onPress={this.login.bind(this)}>
+                <Text style={styles.instructions}>Login</Text>
+              </TouchableHighlight>
+            </View>);
           }
         })()}
       </View>
@@ -117,6 +133,13 @@ const styles = StyleSheet.create({
     color: theme.color.tint,
     marginBottom: 5,
   },
+  textInput: {
+    width: 300,
+    height: 40,
+    padding: 10,
+    backgroundColor: 'white',
+    marginBottom: 10
+  }
 });
 
 

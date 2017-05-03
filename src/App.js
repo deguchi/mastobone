@@ -26,21 +26,30 @@ import Spinner from './components/Spinner';
 
 
 import {
+  initializeAPI,
   getToken,
   removeToken,
+  getCurrentUser,
 } from './actions'
 
 const mapStateToProps = store => ({
   api: store.api,
   token: store.token,
+  currentUser: store.currentUser,
 });
 
 const mapDispatchToProps = dispatch => ({
+  initializeAPI (domain, scopes, clientName) {
+    return dispatch(initializeAPI(domain, scopes, clientName))
+  },
   getToken () {
     return dispatch(getToken())
   },
   removeToken () {
     return dispatch(removeToken())
+  },
+  getCurrentUser () {
+    return dispatch(getCurrentUser())
   },
 });
 
@@ -91,15 +100,19 @@ class App extends Component {
       loading: true,
     };
   }
-  componentDidMount() {
-    this.props.getToken().then(() => {
-      this.setState({loading: false});
-      console.log(this.props.token)
-      if(this.props.token) {
-        this.props.api.setToken(this.props.token);
-        Actions.main();
-      }
-    });
+  async componentDidMount() {
+    // console.log(this.props.token)
+    await this.props.getCurrentUser();
+    await this.props.getToken(this.props.currentUser);
+    this.setState({loading: false});
+    if(this.props.token) {
+      // todo: アプリ設定の共通化
+      // console.log(this.props.currentUser.split('@')[1])
+      await this.props.initializeAPI(this.props.currentUser.split('@')[1], 'read write follow', 'Mastobone');
+      // console.log(this.props.api)
+      this.props.api.setToken(this.props.token);
+      Actions.main();
+    }
   }
   logout () {
     this.props.removeToken().then(() => {

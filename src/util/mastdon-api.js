@@ -5,8 +5,8 @@
 import querystring from 'querystring';
 
 export default class MastodonAPI {
-  constructor(baseUrl, scopes, clientName) {
-    this.baseUrl = baseUrl;
+  constructor(domain, scopes, clientName) {
+    this.baseUrl = 'https://' + domain;
     this.scopes = scopes;
     this.clientName = clientName;
     this.clientId = null;
