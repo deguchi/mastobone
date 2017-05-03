@@ -1,3 +1,7 @@
+/**
+ * @flow
+ */
+
 const size = {
   horizontalPadding: 24,
   verticalPadding: 16,

@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native';
 
-const loadToken = (onComplete: ?() => void) => {
+const getToken = (onComplete: ?() => void) => {
   return (dispatch, getState) => {
     return AsyncStorage.getItem('token').then((value)=>{
       dispatch(Success(JSON.parse(value)));
@@ -12,7 +12,7 @@ const loadToken = (onComplete: ?() => void) => {
   }
 };
 
-const saveToken = (value) => {
+const setToken = (value) => {
   return (dispatch, getState) => {
     return AsyncStorage.setItem('token', JSON.stringify(value)).then(()=>{
       dispatch(Success(value));
@@ -51,7 +51,7 @@ const Error = (error) => {
 };
 
 module.exports = {
-  loadToken,
-  saveToken,
+  getToken,
+  setToken,
   removeToken,
 };

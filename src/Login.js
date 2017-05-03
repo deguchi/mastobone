@@ -16,8 +16,8 @@ import theme from './util/theme';
 
 import {
   initializeAPI,
-  loadToken,
-  saveToken,
+  getToken,
+  setToken,
 } from './actions'
 
 const mapStateToProps = store => ({
@@ -29,11 +29,11 @@ const mapDispatchToProps = dispatch => ({
   initializeAPI (baseUrl, scopes, clientName) {
     return dispatch(initializeAPI(baseUrl, scopes, clientName))
   },
-  loadToken () {
-    return dispatch(loadToken())
+  getToken () {
+    return dispatch(getToken())
   },
-  saveToken (token) {
-    return dispatch(saveToken(token))
+  setToken (token) {
+    return dispatch(setToken(token))
   },
 });
 
@@ -49,7 +49,7 @@ class Login extends Component {
       clientSecret: null,
       authorizationCode: null,
     };
-    this.props.loadToken();
+    this.props.getToken();
     this.props.initializeAPI(this.state.baseUrl, this.state.scopes, this.state.clientName);
   }
   async login() {
@@ -64,17 +64,13 @@ class Login extends Component {
     if(url.match(/\/oauth\/authorize\/(.*)/)) {
       // console.log(RegExp.$1);
       const token = await this.props.api.getToken(RegExp.$1);
-      this.props.saveToken(token).then(() => {
+      this.props.setToken(token).then(() => {
         Actions.main();
       });
     }
   }
   render() {
     console.log(this.props);
-    if (this.props.token) {
-      Actions.main();
-      return null;
-    }
     return (
       <View style={styles.container}>
         <TouchableHighlight onPress={this.login.bind(this)}>

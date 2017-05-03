@@ -22,8 +22,11 @@ import I18n from './util/i18n';
 import Login from './Login';
 import Home from './Home';
 
+import Spinner from './components/Spinner';
+
 
 import {
+  getToken,
   removeToken,
 } from './actions'
 
@@ -33,6 +36,9 @@ const mapStateToProps = store => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  getToken () {
+    return dispatch(getToken())
+  },
   removeToken () {
     return dispatch(removeToken())
   },
@@ -79,13 +85,32 @@ const styles = StyleSheet.create({
 });
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loading: true,
+    };
+  }
+  componentDidMount() {
+    this.props.getToken().then((token) => {
+      this.setState({loading: false});
+      if(this.props.token) {
+        Actions.main();
+      }
+    });
+  }
   logout () {
     this.props.removeToken().then(() => {
       Actions.login();
     });
   }
   render () {
-    // console.log(this.props)
+    console.log(this.props)
+    if (this.state.loading) {
+      return (<View style={{flex:1, backgroundColor: theme.color.bg}}>
+        <Spinner error={false} />
+      </View>);
+    }
     return (
       <Router
         sceneStyle={styles.scene}
