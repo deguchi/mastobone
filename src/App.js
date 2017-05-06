@@ -93,7 +93,13 @@ const styles = StyleSheet.create({
 
 });
 
+type State = {
+  login: boolean,
+  loading: boolean,
+};
+
 class App extends Component {
+  state: State;
   constructor(props) {
     super(props);
     this.state = {

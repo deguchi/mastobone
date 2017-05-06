@@ -1,3 +1,4 @@
+
 [ignore]
 ; We fork some components by platform
 .*/*[.]android.js
@@ -14,7 +15,10 @@
 .*/Libraries/react-native/React.js
 .*/Libraries/react-native/ReactNative.js
 
-[include]
+<PROJECT_ROOT>/node_modules/.*
+;<PROJECT_ROOT>/src/.*
+.*/__tests__/.*
+
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
@@ -25,12 +29,15 @@ flow/
 emoji=true
 
 module.system=haste
+module.system.node.resolve_dirname=nodemodule
+module.system.node.resolve_dirname=src
 
 experimental.strict_type_args=true
 
 munge_underscores=true
 
 module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
+
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe

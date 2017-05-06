@@ -10,7 +10,7 @@ import {
 import SafariView from 'react-native-safari-view';
 import theme from './theme';
 
-export default (url) => {
+export default (url: string) => {
   if (Platform.OS === 'ios') {
     SafariView.isAvailable()
       .then(SafariView.show({

@@ -43,12 +43,19 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+type State = {
+  username: string,
+  timeline: Array<any>,
+  refreshing: boolean,
+};
+
 class Home extends Component {
+  state: State;
   constructor(props) {
     super(props);
     this.state = {
-      username: null,
-      timeline: null,
+      username: '',
+      timeline: [],
       refreshing: false,
     };
   }
@@ -75,8 +82,7 @@ class Home extends Component {
     this.props.api.getTimeline().then((resp) => {
       console.log(resp);
       if (!resp.status) {
-        let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-        this.setState({timeline: ds.cloneWithRows(resp)});
+        this.setState({timeline: resp});
       }
     });
   }
@@ -86,12 +92,13 @@ class Home extends Component {
   }
   render() {
     // console.log(this.props)
+    let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     return (
       <View style={styles.container}>
         {(() => {
-          if (this.state.timeline) {
+          if (this.state.timeline.length > 0) {
             return <ListView
-              dataSource={this.state.timeline}
+              dataSource={ds.cloneWithRows(this.state.timeline)}
               renderRow={(twoot) => <Twoot twoot={twoot} />}
               style={[styles.timeline, ContainerStyle]}
               refreshControl={
@@ -101,7 +108,7 @@ class Home extends Component {
                 />
               }
             />;
-          } else if (this.state.username) {
+          } else if (this.state.username !== '') {
             return (
               <Text style={styles.instructions}>
                 {I18n.t('Welcome')} {this.state.username}

@@ -49,14 +49,18 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+type State = {
+  url: string,
+  domain: string,
+  loading: boolean,
+};
+
 class Login extends Component {
+  state: State;
   constructor(props) {
     super(props);
     this.state = {
-      url: null,
-      clientId: null,
-      clientSecret: null,
-      authorizationCode: null,
+      url: '',
       domain: '',
       loading: false,
     };
@@ -76,7 +80,7 @@ class Login extends Component {
     // console.log(url)
     if(url.match(/\/oauth\/authorize\/(.*)/)) {
       // console.log(RegExp.$1);
-      this.setState({url: null, loading: true});
+      this.setState({url: '', loading: true});
       const token = await this.props.api.getToken(RegExp.$1);
       let username;
       await this.props.api.setToken(token);
@@ -96,7 +100,7 @@ class Login extends Component {
     return (
       <View style={styles.container}>
         {(() => {
-          if (this.state.url) {
+          if (this.state.url !== '') {
             return (<WebView
               source={{uri: this.state.url}}
               style={{marginTop: 20, width: 400, height: 750}}

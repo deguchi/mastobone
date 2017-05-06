@@ -7,14 +7,21 @@ import querystring from 'querystring';
 import appconfig from './appconfig';
 
 export default class MastodonAPI {
-  constructor(domain) {
+  baseUrl: string
+  scopes: string
+  clientName: string
+  clientId: string
+  clientSecret: string
+  token: string
+  constructor(domain:string) {
     this.baseUrl = 'https://' + domain;
     this.scopes = appconfig.scopes;
     this.clientName = appconfig.clientName;
-    this.clientId = null;
-    this.token = null;
+    this.clientId = '';
+    this.clientSecret = '';
+    this.token = '';
   }
-  setToken(token) {
+  setToken(token: string) {
     this.token = token;
   }
   createOAuthApp() {
@@ -57,7 +64,7 @@ export default class MastodonAPI {
         resolve(url);
     });
   }
-  getToken (code) {
+  getToken (code: string) {
     return new Promise((resolve, reject) => {
       fetch(`${this.baseUrl}/oauth/token`, {
         method: 'POST',
@@ -88,7 +95,7 @@ export default class MastodonAPI {
       });
     });
   }
-  _request(path, method='GET') {
+  _request(path, method:string='GET') {
     return fetch(this.baseUrl + path, {
       method: method,
       headers: {
