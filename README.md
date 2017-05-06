@@ -1,6 +1,6 @@
 # Mastobone
 
-Mastodon client app barebone for iOS and Android.
+Mastodon client app barebone for iOS and Android, built using [React Native](https://facebook.github.io/react-native/)
 
 ## ScreenShot
 
