@@ -23,7 +23,6 @@ import openBrowser from './util/openBrowser';
 import I18n from './util/i18n';
 
 import Spinner from './components/Spinner';
-import ContainerStyle from './components/ContainerStyle';
 
 import {
   initializeAPI,
@@ -93,42 +92,44 @@ class Home extends Component {
   render() {
     // console.log(this.props)
     let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
-    return (
-      <View style={styles.container}>
-        {(() => {
-          if (this.state.timeline.length > 0) {
-            return <ListView
-              dataSource={ds.cloneWithRows(this.state.timeline)}
-              renderRow={(twoot) => <Twoot twoot={twoot} />}
-              style={[styles.timeline, ContainerStyle]}
-              refreshControl={
-                <RefreshControl
-                  refreshing={this.state.refreshing}
-                  onRefresh={this._onRefresh.bind(this)}
-                />
-              }
-            />;
-          } else if (this.state.username !== '') {
-            return (
-              <Text style={styles.instructions}>
-                {I18n.t('Welcome')} {this.state.username}
-              </Text>
-            );
-          } else {
-            return <Spinner error={false} />;
+    if (this.state.timeline.length > 0) {
+      return (<View style={styles.container}>
+        <ListView
+          dataSource={ds.cloneWithRows(this.state.timeline)}
+          renderRow={(twoot) => <Twoot twoot={twoot} />}
+          style={styles.timeline}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.refreshing}
+              onRefresh={this._onRefresh.bind(this)}
+            />
           }
-        })()}
-      </View>
-    );
+        />
+      </View>);
+    } else if (this.state.username !== '') {
+      return (<View style={styles.containerCenter}>
+        <Text style={styles.instructions}>
+          {I18n.t('Welcome')} {this.state.username}
+        </Text>
+      </View>);
+    } else {
+      return (<View style={styles.containerCenter}>
+          <Spinner error={false} />
+      </View>);
+    }
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: theme.color.bg,
+  },
+  containerCenter: {
+    flex: 1,
+    backgroundColor: theme.color.bg,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: theme.color.bg,
   },
   welcome: {
     fontSize: 20,
@@ -136,7 +137,6 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   instructions: {
-    textAlign: 'center',
     color: theme.color.tint,
     marginBottom: 5,
   },

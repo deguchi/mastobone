@@ -4,6 +4,7 @@
 
 import React, { Component } from 'react';
 import {
+  Platform,
   StyleSheet,
   Text,
   View,
@@ -56,15 +57,26 @@ const mapDispatchToProps = dispatch => ({
 
 
 const TabIcon = ({ selected, title, iconName, size }) => (
-  <View style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}>
+  <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
     <Icon name={iconName} size={size} color={selected ? theme.color.tint : '#fff'} style={{ marginRight: 5 }}/>
-    <Text style={{ color: selected ? '#2b90d9' : '#fff' }}>{title}</Text>
+    <Text style={{ color: selected ? theme.color.tint : '#fff' }}>{title}</Text>
   </View>
 );
 
 const styles = StyleSheet.create({
   scene: {
     backgroundColor: theme.color.bg
+  },
+
+  navContainer: {
+    ...Platform.select({
+      ios: {
+        paddingTop: 64,
+      },
+      android: {
+        paddingTop: 54,
+      },
+    }),
   },
 
   iconContainer: {
@@ -90,8 +102,11 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 17,
   },
-
+  tabContainer: {
+    paddingBottom: 50,
+  }
 });
+
 
 type State = {
   login: boolean,
@@ -107,7 +122,10 @@ class App extends Component {
       login: false,
     };
   }
-  async componentDidMount() {
+  componentDidMount() {
+    this.initialize();
+  }
+  async initialize() {
     // console.log(this.props.token)
     await this.props.getCurrentUser();
     if (this.props.currentUser) {
@@ -145,12 +163,34 @@ class App extends Component {
         titleStyle={styles.navTitle}
       >
         <Scene key='root'>
-          <Scene key='main' tabs={true} tabBarIconContainerStyle={styles.iconContainer} tabBarSelectedItemStyle={styles.iconContainerSelected} tabBarStyle={styles.bar} type={ActionConst.REPLACE}>
-            <Scene key='home' size={30} sceneStyle={styles.scene} title={I18n.t('Home')} iconName='home' icon={TabIcon} component={Home} initial={true}  renderRightButton={() => {
-              return <IconIonicons name="md-exit" size={24} color={theme.color.tint} style={{ marginRight: 5 }} onPress={this.logout.bind(this)} />
-            }} />
+          <Scene key='main'
+                 tabs={true}
+                 tabBarIconContainerStyle={styles.iconContainer}
+                 tabBarSelectedItemStyle={styles.iconContainerSelected}
+                 tabBarStyle={styles.bar}
+                 type={ActionConst.REPLACE}>
+            <Scene key='home'
+                   size={30}
+                   sceneStyle={[styles.scene, styles.navContainer, styles.tabContainer]}
+                   title={I18n.t('Home')}
+                   iconName='home'
+                   icon={TabIcon}
+                   component={Home}
+                   renderRightButton={() => {
+                    return <IconIonicons name="md-exit"
+                                         size={24}
+                                         color={theme.color.tint}
+                                         style={{ marginRight: 5 }}
+                                         onPress={this.logout.bind(this)}
+                    />
+                   }}
+            />
           </Scene>
-          <Scene key='login' hideNavBar={true} component={Login} title={I18n.t('Login')} initial={this.state.login} />
+          <Scene key='login'
+                 hideNavBar={true}
+                 component={Login}
+                 title={I18n.t('Login')}
+                 initial={this.state.login} />
         </Scene>
       </Router>
     )
