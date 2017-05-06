@@ -166,19 +166,45 @@ const Twoot = (props) => {
       color: 'white',
     },
     body: {
+      width: 280,
       marginLeft: 10,
+    },
+    map: {
+      marginTop: 10,
+      width: null,
+      height: 200,
     }
   });
+
+  console.log(props.twoot.extra)
+  if (props.twoot.extra !== "null" && props.twoot.extra !== {}) {
+  }
+
   return (
     <View style={style.container}>
       <Image source={{uri: props.twoot.account.avatar_static}} style={style.icon} />
       <View style={style.body}>
-        <Text style={style.username}>{props.twoot.account.username}</Text>
+        <Text style={style.username}>{props.twoot.account.acct}</Text>
         <HTMLView
           value={props.twoot.content}
           onLinkPress={(url) => openBrowser(url)}
           stylesheet={style}
         />
+        {(() => {
+          // experimental
+          if (props.twoot.extra !== "null" && props.twoot.extra !== "{}") {
+            const extra = JSON.parse(props.twoot.extra);
+            console.log(extra);
+            const placeName = 'Hello Mastodon!';
+            const zoom = 17;
+            const lat = extra['lat'];
+            const lon = extra['lon'];
+            console.log(lat, lon);
+            return <TouchableHighlight onPress={() => openBrowser(`https://www.google.co.jp/maps/place/${encodeURIComponent(placeName)}/@${lat},${lon},${zoom}z/data=!4m5!3m4!1s0x6018f313a98e3861:0x580be5145020e6eb!8m2!3d35.665507!4d139.66342`)}>
+              <Image style={style.map} source={{uri: `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=${zoom}&size=280x200&maptype=roadmap&markers=color:red%7Clabel:C%7C35.665507,139.6612313&key=AIzaSyBbo4xyvaCt93zN9FmQcH0MFWQBV_0SFJU`}}/>
+            </TouchableHighlight>
+          }
+        })()}
       </View>
     </View>
   );
