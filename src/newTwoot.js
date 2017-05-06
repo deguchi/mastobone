@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
   textInput: {
     fontSize: 16,
     width: null,
-    height: 500,
+    height: 250,
     padding: 10,
     backgroundColor: theme.color.shine,
     marginBottom: 10

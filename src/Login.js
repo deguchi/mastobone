@@ -103,7 +103,7 @@ class Login extends Component {
           if (this.state.url !== '') {
             return (<WebView
               source={{uri: this.state.url}}
-              style={{marginTop: 20, width: 400, height: 750}}
+              style={{marginTop: 20, width: 400, height: 750, backgroundColor: theme.color.bg}}
               onLoad={(event) => this.getAuthorizationCode(event.nativeEvent.url)}
             />);
           } else if(this.state.loading) {
