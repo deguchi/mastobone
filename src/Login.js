@@ -84,7 +84,7 @@ class Login extends Component {
       const token = await this.props.api.getToken(RegExp.$1);
       let username;
       await this.props.api.setToken(token);
-      await this.props.api.getCurrentAccount().then((resp) => {
+      await this.props.api.get('/api/v1/accounts/verify_credentials').then((resp) => {
         // console.log(resp);
         if (!resp.status) {
           username = resp.username;
