@@ -8,6 +8,7 @@ const size = {
 };
 
 const color = {
+  shine: '#ffffff',
   tint: '#2b90d9',
   bg: '#282c37',
   gray: '#707B97',

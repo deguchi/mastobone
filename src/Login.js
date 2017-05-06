@@ -110,7 +110,7 @@ class Login extends Component {
             return <Spinner error={false} />;
           } else {
             return (<View style={styles.container}>
-              <TextInput style={styles.textInput} placeholder={'Enter instance domain'}
+              <TextInput style={styles.textInput} placeholder={I18n.t('EnterDomain')}
                 onChangeText={(value) => this.setState({domain: value})}
                 autoCapitalize="none"
                 autoFocus={true}
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     width: 300,
     height: 40,
     padding: 10,
-    backgroundColor: 'white',
+    backgroundColor: theme.color.shine,
     marginBottom: 10
   }
 });

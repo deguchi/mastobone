@@ -12,11 +12,19 @@ I18n.translations = {
     Home: 'Home',
     Login: 'Home',
     Welcome: 'Welcome',
+    EnterDomain: 'Enter instance domain',
+    NewTwoot: 'new Twoot',
+    WhatDoing: 'What are you doing now?',
+    Twoot: 'Twoot!',
   },
   ja: {
     Home: 'ホーム',
     Login: 'ログイン',
     Welcome: 'ようこそ',
+    EnterDomain: 'Enter instance domain',
+    NewTwoot: '新規つぶやき',
+    WhatDoing: 'いまなにしてる？',
+    Twoot: 'トゥート！',
   }
 };
 

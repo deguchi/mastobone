@@ -8,11 +8,11 @@ Mastodon client app barebone for iOS and Android.
 
 ## Todo
 
-Federated Timeline, Twoot, Follow, Notification, etc, etc,
+Federated Timeline, Follow, Notification, etc, etc,
 
 ## Implemented functions
 
-Timeline,
+Timeline, Twoot,
 
 ## Getting Started
 

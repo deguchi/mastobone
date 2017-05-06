@@ -22,6 +22,7 @@ import I18n from './util/i18n';
 
 import Login from './Login';
 import Home from './Home';
+import newTwoot from './newTwoot';
 
 import Spinner from './components/Spinner';
 
@@ -58,8 +59,13 @@ const mapDispatchToProps = dispatch => ({
 
 const TabIcon = ({ selected, title, iconName, size }) => (
   <View style={{ flex: 1, flexDirection: 'column', alignItems: 'center' }}>
-    <Icon name={iconName} size={size} color={selected ? theme.color.tint : '#fff'} style={{ marginRight: 5 }}/>
-    <Text style={{ color: selected ? theme.color.tint : '#fff' }}>{title}</Text>
+    <Icon name={iconName}
+          size={size}
+          color={selected ? theme.color.tint : theme.color.text}
+    />
+    <Text style={{ color: selected ? theme.color.tint : theme.color.shine}}>
+      {title}
+    </Text>
   </View>
 );
 
@@ -176,12 +182,20 @@ class App extends Component {
                    iconName='home'
                    icon={TabIcon}
                    component={Home}
-                   renderRightButton={() => {
+                   renderLeftButton={() => {
                     return <IconIonicons name="md-exit"
                                          size={24}
                                          color={theme.color.tint}
                                          style={{ marginRight: 5 }}
                                          onPress={this.logout.bind(this)}
+                    />
+                   }}
+                   renderRightButton={() => {
+                    return <IconIonicons name="ios-create"
+                                         size={24}
+                                         color={theme.color.tint}
+                                         style={{ marginRight: 5 }}
+                                         onPress={Actions.newTwoot}
                     />
                    }}
             />
@@ -190,7 +204,15 @@ class App extends Component {
                  hideNavBar={true}
                  component={Login}
                  title={I18n.t('Login')}
-                 initial={this.state.login} />
+                 initial={this.state.login}
+          />
+          <Scene key='newTwoot'
+                 hideNavBar={true}
+                 component={newTwoot}
+                 title={I18n.t('NewTwoot')}
+                 direction="vertical"
+                 initial={false}
+          />
         </Scene>
       </Router>
     )

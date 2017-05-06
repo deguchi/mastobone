@@ -70,7 +70,7 @@ class Home extends Component {
   }
   _fetch() {
     // console.log(this.props.api.token)
-    this.props.api.getCurrentAccount().then((resp) => {
+    this.props.api.get('/api/v1/accounts/verify_credentials').then((resp) => {
       console.log(resp);
       if (!resp.status) {
         this.setState({username: resp.username, refreshing: false});
@@ -78,7 +78,7 @@ class Home extends Component {
         this._logout();
       }
     });
-    this.props.api.getTimeline().then((resp) => {
+    this.props.api.get('/api/v1/timelines/home').then((resp) => {
       console.log(resp);
       if (!resp.status) {
         this.setState({timeline: resp});
@@ -160,17 +160,16 @@ const Twoot = (props) => {
     },
     span: {
       color: theme.color.tint,
-      // color: 'white',
     },
     p: {
-      color: 'white',
+      color: theme.color.shine,
     },
     icon: {
       width: 50,
       height: 50,
     },
     username: {
-      color: 'white',
+      color: theme.color.shine,
     },
     body: {
       width: 280,

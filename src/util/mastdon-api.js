@@ -26,7 +26,7 @@ export default class MastodonAPI {
   }
   createOAuthApp() {
     const url = this.baseUrl +'/api/v1/apps';
-    var redirectUri = 'urn:ietf:wg:oauth:2.0:oob';
+    const redirectUri = 'urn:ietf:wg:oauth:2.0:oob';
 
     return new Promise((resolve, reject) => {
       fetch(url, {
@@ -53,9 +53,9 @@ export default class MastodonAPI {
     });
   }
   getAuthorizationUrl() {
-    var redirectUri = 'urn:ietf:wg:oauth:2.0:oob';
+    const redirectUri = 'urn:ietf:wg:oauth:2.0:oob';
     return new Promise((resolve) => {
-        var url = this.baseUrl + '/oauth/authorize' + "?" + querystring.stringify({
+        const url = this.baseUrl + '/oauth/authorize' + "?" + querystring.stringify({
           redirect_uri: redirectUri,
           response_type: 'code',
           client_id: this.clientId,
@@ -83,9 +83,9 @@ export default class MastodonAPI {
       .then((response) => response.json())
       .then((response) => {
         // console.log(response)
-        var accessToken= response["access_token"];
+        const accessToken= response["access_token"];
         resolve(accessToken);
-        // var refresh_token= response["refresh_token"];
+        // const refresh_token= response["refresh_token"];
         // delete response["refresh_token"];
         // return callback(null, access_token, refresh_token, response); // callback results =-=
       })
@@ -95,17 +95,23 @@ export default class MastodonAPI {
       });
     });
   }
-  _request(path, method:string='GET') {
+  _request(path:string, method:string='GET', params:any) {
+    // console.log(method)
     return fetch(this.baseUrl + path, {
       method: method,
       headers: {
-        Authorization: `Bearer ${this.token}`
-      }
+        'Authorization': `Bearer ${this.token}`,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(params)
+
     })
     .then((response) => {
       if (response.status===200) {
         return response.json();
       } else {
+        console.log(response)
         throw response;
       }
     })
@@ -116,13 +122,10 @@ export default class MastodonAPI {
       return error;
     });
   }
-  getCurrentAccount() {
-    return this._request('/api/v1/accounts/verify_credentials');
+  get(path:string, params:any) {
+    return this._request(path, 'GET', params);
   }
-  getTimeline() {
-    return this._request('/api/v1/timelines/home');
-  }
-  getPublic() {
-    return this._request('/api/v1/timelines/public');
+  post(path:string, params:any) {
+    return this._request(path, 'POST', params);
   }
 }
