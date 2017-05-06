@@ -113,4 +113,7 @@ export default class MastodonAPI {
   getTimeline() {
     return this._request('/api/v1/timelines/home');
   }
+  getPublic() {
+    return this._request('/api/v1/timelines/public');
+  }
 }
