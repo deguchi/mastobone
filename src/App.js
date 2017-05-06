@@ -98,6 +98,7 @@ class App extends Component {
     super(props);
     this.state = {
       loading: true,
+      login: false,
     };
   }
   async componentDidMount() {
@@ -107,17 +108,16 @@ class App extends Component {
       await this.props.getToken(this.props.currentUser);
       // console.log(this.props.token)
       if(this.props.token) {
-        // todo: アプリ設定の共通化
         // console.log(this.props.currentUser.split('@')[1])
         await this.props.initializeAPI(this.props.currentUser.split('@')[1]);
-        // console.log(this.props.api)
+        console.log(this.props.api)
         this.props.api.setToken(this.props.token);
         this.setState({loading: false});
       } else {
-        Actions.login();
+        this.setState({login: true, loading: false});
       }
     } else {
-      Actions.login();
+      this.setState({login: true, loading: false});
     }
   }
   logout () {
@@ -144,7 +144,7 @@ class App extends Component {
               return <IconIonicons name="md-exit" size={24} color={theme.color.tint} style={{ marginRight: 5 }} onPress={this.logout.bind(this)} />
             }} />
           </Scene>
-          <Scene key='login' hideNavBar={true} component={Login} title={I18n.t('Login')} />
+          <Scene key='login' hideNavBar={true} component={Login} title={I18n.t('Login')} initial={this.state.login} />
         </Scene>
       </Router>
     )

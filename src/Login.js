@@ -13,6 +13,8 @@ import {
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
 
+import Spinner from './components/Spinner';
+
 import theme from './util/theme';
 import I18n from './util/i18n';
 
@@ -56,6 +58,7 @@ class Login extends Component {
       clientSecret: null,
       authorizationCode: null,
       domain: '',
+      loading: false,
     };
   }
   async login() {
@@ -73,6 +76,7 @@ class Login extends Component {
     // console.log(url)
     if(url.match(/\/oauth\/authorize\/(.*)/)) {
       // console.log(RegExp.$1);
+      this.setState({url: null, loading: true});
       const token = await this.props.api.getToken(RegExp.$1);
       let username;
       await this.props.api.setToken(token);
@@ -98,6 +102,8 @@ class Login extends Component {
               style={{marginTop: 20, width: 400, height: 750}}
               onLoad={(event) => this.getAuthorizationCode(event.nativeEvent.url)}
             />);
+          } else if(this.state.loading) {
+            return <Spinner error={false} />;
           } else {
             return (<View style={styles.container}>
               <TextInput style={styles.textInput} placeholder={'Enter instance domain'}

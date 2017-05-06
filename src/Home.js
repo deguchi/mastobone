@@ -65,7 +65,7 @@ class Home extends Component {
   _fetch() {
     // console.log(this.props.api.token)
     this.props.api.getCurrentAccount().then((resp) => {
-      // console.log(resp);
+      console.log(resp);
       if (!resp.status) {
         this.setState({username: resp.username, refreshing: false});
       } else if (resp.status===401) {
@@ -73,7 +73,7 @@ class Home extends Component {
       }
     });
     this.props.api.getTimeline().then((resp) => {
-      // console.log(resp);
+      console.log(resp);
       if (!resp.status) {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({timeline: ds.cloneWithRows(resp)});
