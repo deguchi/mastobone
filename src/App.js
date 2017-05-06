@@ -105,17 +105,19 @@ class App extends Component {
     await this.props.getCurrentUser();
     if (this.props.currentUser) {
       await this.props.getToken(this.props.currentUser);
-      this.setState({loading: false});
+      // console.log(this.props.token)
       if(this.props.token) {
         // todo: アプリ設定の共通化
         // console.log(this.props.currentUser.split('@')[1])
-        await this.props.initializeAPI(this.props.currentUser.split('@')[1], 'read write follow', 'Mastobone');
+        await this.props.initializeAPI(this.props.currentUser.split('@')[1]);
         // console.log(this.props.api)
         this.props.api.setToken(this.props.token);
-        Actions.main();
+        this.setState({loading: false});
+      } else {
+        Actions.login();
       }
     } else {
-      this.setState({loading: false});
+      Actions.login();
     }
   }
   logout () {
@@ -137,12 +139,12 @@ class App extends Component {
         titleStyle={styles.navTitle}
       >
         <Scene key='root'>
-          <Scene key='login' hideNavBar={true} component={Login} title={I18n.t('Login')} initial={true} />
           <Scene key='main' tabs={true} tabBarIconContainerStyle={styles.iconContainer} tabBarSelectedItemStyle={styles.iconContainerSelected} tabBarStyle={styles.bar} type={ActionConst.REPLACE}>
             <Scene key='home' size={30} sceneStyle={styles.scene} title={I18n.t('Home')} iconName='home' icon={TabIcon} component={Home} initial={true}  renderRightButton={() => {
               return <IconIonicons name="md-exit" size={24} color={theme.color.tint} style={{ marginRight: 5 }} onPress={this.logout.bind(this)} />
             }} />
           </Scene>
+          <Scene key='login' hideNavBar={true} component={Login} title={I18n.t('Login')} />
         </Scene>
       </Router>
     )

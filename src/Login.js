@@ -52,26 +52,17 @@ class Login extends Component {
     super(props);
     this.state = {
       url: null,
-      clientName: 'Mastobone', // Todo: change your app name
-      scopes: 'read write follow',
       clientId: null,
       clientSecret: null,
       authorizationCode: null,
       domain: '',
     };
-    this.init();
-  }
-  async init() {
-    await this.props.getCurrentUser();
-    if (this.props.currentUser) {
-      this.props.getToken();
-    }
   }
   async login() {
     // console.log(this.state.domain)
     // console.log(this.props.api)
     if (this.state.domain !== '') {
-      await this.props.initializeAPI(this.state.domain, this.state.scopes, this.state.clientName);
+      await this.props.initializeAPI(this.state.domain);
       await this.props.api.createOAuthApp();
       await this.props.api.getAuthorizationUrl().then((url) => {
         this.setState({url: url});

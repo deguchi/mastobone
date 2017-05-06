@@ -4,11 +4,13 @@
 
 import querystring from 'querystring';
 
+import appconfig from './appconfig';
+
 export default class MastodonAPI {
-  constructor(domain, scopes, clientName) {
+  constructor(domain) {
     this.baseUrl = 'https://' + domain;
-    this.scopes = scopes;
-    this.clientName = clientName;
+    this.scopes = appconfig.scopes;
+    this.clientName = appconfig.clientName;
     this.clientId = null;
     this.token = null;
   }

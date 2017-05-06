@@ -63,9 +63,9 @@ class Home extends Component {
     }
   }
   _fetch() {
-    console.log(this.props.api.token)
+    // console.log(this.props.api.token)
     this.props.api.getCurrentAccount().then((resp) => {
-      console.log(resp);
+      // console.log(resp);
       if (!resp.status) {
         this.setState({username: resp.username, refreshing: false});
       } else if (resp.status===401) {
@@ -73,7 +73,7 @@ class Home extends Component {
       }
     });
     this.props.api.getTimeline().then((resp) => {
-      console.log(resp);
+      // console.log(resp);
       if (!resp.status) {
         let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
         this.setState({timeline: ds.cloneWithRows(resp)});
@@ -176,10 +176,6 @@ const Twoot = (props) => {
     }
   });
 
-  console.log(props.twoot.extra)
-  if (props.twoot.extra !== "null" && props.twoot.extra !== {}) {
-  }
-
   return (
     <View style={style.container}>
       <Image source={{uri: props.twoot.account.avatar_static}} style={style.icon} />
@@ -192,7 +188,7 @@ const Twoot = (props) => {
         />
         {(() => {
           // experimental
-          if (props.twoot.extra !== "null" && props.twoot.extra !== "{}") {
+          if (props.twoot.extra && props.twoot.extra !== "null" && props.twoot.extra !== "{}") {
             const extra = JSON.parse(props.twoot.extra);
             console.log(extra);
             const placeName = 'Hello Mastodon!';
