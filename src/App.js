@@ -183,20 +183,20 @@ class App extends Component {
                    icon={TabIcon}
                    component={Home}
                    renderLeftButton={() => {
-                    return <IconIonicons name="md-exit"
+                    return <View><IconIonicons name="md-exit"
                                          size={24}
                                          color={theme.color.tint}
-                                         style={{ marginRight: 5 }}
+                                         style={{ marginRight: 5, padding: 4 }}
                                          onPress={this.logout.bind(this)}
-                    />
+                      /></View>
                    }}
                    renderRightButton={() => {
-                    return <IconIonicons name="ios-create"
+                    return <View><IconIonicons name="ios-create"
                                          size={24}
                                          color={theme.color.tint}
-                                         style={{ marginRight: 5 }}
+                                         style={{ marginRight: 5, padding: 3 }}
                                          onPress={Actions.newTwoot}
-                    />
+                    /></View>
                    }}
             />
           </Scene>

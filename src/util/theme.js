@@ -9,8 +9,8 @@ const size = {
 
 const color = {
   shine: '#ffffff',
-  tint: '#2b90d9',
-  bg: '#282c37',
+  tint: '#419BDD',
+  bg: '#292B37',
   gray: '#707B97',
   darkText: '#484848',
 };

@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import {
+  Dimensions,
   StyleSheet,
   Text,
   View,
@@ -12,6 +13,8 @@ import {
   TouchableHighlight,
   TextInput,
 } from 'react-native';
+
+const Screen = Dimensions.get('window');
 
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
@@ -104,11 +107,11 @@ const styles = StyleSheet.create({
   },
   textInput: {
     fontSize: 16,
-    width: null,
+    width: Screen.width - 20,
     height: 250,
     padding: 10,
     backgroundColor: theme.color.shine,
-    marginBottom: 10
+    marginBottom: 10,
   },
   button: {
     backgroundColor: theme.color.tint,

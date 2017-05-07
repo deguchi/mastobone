@@ -3,6 +3,7 @@
  */
 import React, { Component } from 'react';
 import {
+  Dimensions,
   StyleSheet,
   Text,
   View,
@@ -12,6 +13,8 @@ import {
 } from 'react-native';
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
+
+const Screen = Dimensions.get('window');
 
 import Spinner from './components/Spinner';
 
@@ -68,10 +71,10 @@ class Login extends Component {
     };
   }
   async login() {
-    // console.log(this.state.domain)
-    // console.log(this.props.api)
+    console.log(this.state.domain)
     if (this.state.domain !== '') {
       await this.props.initializeAPI(this.state.domain);
+      console.log(this.props.api)
       await this.props.api.createOAuthApp();
       await this.props.api.getAuthorizationUrl().then((url) => {
         this.setState({url: url});
@@ -79,9 +82,9 @@ class Login extends Component {
     }
   }
   async getAuthorizationCode(url) {
-    // console.log(url)
-    if(url.match(/\/oauth\/authorize\?redirect_uri/)) {
-      this.setState({ webViewStyle:{marginTop: 20, width: 400, height: 750} });
+    console.log(url)
+    if(url.match('/auth/sign_in') || url.match(/\/oauth\/authorize\?redirect_uri/)) {
+      this.setState({ webViewStyle:{marginTop: 20, width: Screen.width, height: Screen.height} });
     } else if(url.match(/\/oauth\/authorize\/(.*)/)) {
       // console.log(RegExp.$1);
       this.setState({url: '', loading: true});
@@ -124,7 +127,9 @@ class Login extends Component {
                 autoCorrect={false}
               />
               <TouchableHighlight onPress={this.login.bind(this)}>
-                <Text style={styles.instructions}>Login</Text>
+                <View>
+                  <Text style={styles.instructions}>Login</Text>
+                </View>
               </TouchableHighlight>
             </View>);
           }
