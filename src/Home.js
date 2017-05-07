@@ -164,6 +164,9 @@ const Twoot = (props) => {
     p: {
       color: theme.color.shine,
     },
+    iconContainer: {
+      flex: 1,
+    },
     icon: {
       width: 50,
       height: 50,
@@ -172,8 +175,7 @@ const Twoot = (props) => {
       color: theme.color.shine,
     },
     body: {
-      width: 280,
-      marginLeft: 10,
+      flex: 4.5,
     },
     map: {
       marginTop: 10,
@@ -184,7 +186,9 @@ const Twoot = (props) => {
 
   return (
     <View style={style.container}>
-      <Image source={{uri: props.twoot.account.avatar_static}} style={style.icon} />
+      <View style={style.iconContainer}>
+        <Image source={{uri: props.twoot.account.avatar_static}} style={style.icon} />
+      </View>
       <View style={style.body}>
         <Text style={style.username}>{props.twoot.account.acct}</Text>
         <HTMLView

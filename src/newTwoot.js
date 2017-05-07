@@ -72,7 +72,7 @@ class newTwoot extends Component {
          size={32}
          color={theme.color.shine}
          style={styles.cancel}
-         onPress={Actions.main}
+         onPress={Actions.pop}
       />
       <TextInput style={styles.textInput}
                  placeholder={I18n.t('WhatDoing')}
@@ -92,7 +92,7 @@ class newTwoot extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: theme.color.bg,
     padding: 10,
