@@ -16,6 +16,7 @@ export default (url: string) => {
       .then(SafariView.show({
         url: url,
         tintColor: theme.color.tint,
+        barTintColor: theme.color.bg,
       }))
       .catch(error => {
         // Fallback WebView code for iOS 8 and earlier
