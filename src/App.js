@@ -99,8 +99,6 @@ const styles = StyleSheet.create({
 
   bar: {
     backgroundColor: theme.color.bg,
-    borderBottomWidth: 1,
-    borderBottomColor: theme.color.tint,
   },
 
   navTitle: {

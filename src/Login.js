@@ -73,6 +73,7 @@ class Login extends Component {
   async login() {
     console.log(this.state.domain)
     if (this.state.domain !== '') {
+      this.setState({loading:true});
       await this.props.initializeAPI(this.state.domain);
       console.log(this.props.api)
       await this.props.api.createOAuthApp();
@@ -84,7 +85,7 @@ class Login extends Component {
   async getAuthorizationCode(url) {
     console.log(url)
     if(url.match('/auth/sign_in') || url.match(/\/oauth\/authorize\?redirect_uri/)) {
-      this.setState({ webViewStyle:{marginTop: 20, width: Screen.width, height: Screen.height} });
+      this.setState({ loading:false, webViewStyle:{marginTop: 20, width: Screen.width, height: Screen.height} });
     } else if(url.match(/\/oauth\/authorize\/(.*)/)) {
       // console.log(RegExp.$1);
       this.setState({url: '', loading: true});
