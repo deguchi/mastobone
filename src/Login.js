@@ -51,6 +51,7 @@ const mapDispatchToProps = dispatch => ({
 
 type State = {
   url: string,
+  webViewStyle: any,
   domain: string,
   loading: boolean,
 };
@@ -61,6 +62,7 @@ class Login extends Component {
     super(props);
     this.state = {
       url: '',
+      webViewStyle: {marginTop: 20, width: 0, height: 0},
       domain: '',
       loading: false,
     };
@@ -78,7 +80,9 @@ class Login extends Component {
   }
   async getAuthorizationCode(url) {
     // console.log(url)
-    if(url.match(/\/oauth\/authorize\/(.*)/)) {
+    if(url.match(/\/oauth\/authorize\?redirect_uri/)) {
+      this.setState({ webViewStyle:{marginTop: 20, width: 400, height: 750} });
+    } else if(url.match(/\/oauth\/authorize\/(.*)/)) {
       // console.log(RegExp.$1);
       this.setState({url: '', loading: true});
       const token = await this.props.api.getToken(RegExp.$1);
@@ -93,8 +97,11 @@ class Login extends Component {
       await this.props.setCurrentUser(username, this.state.domain);
       await this.props.setToken(token);
       Actions.main();
+    } else if (url.match(/\/oauth\/authorize$/)) {
+      this.setState({url: ''});
     }
   }
+
   render() {
     // console.log(this.props);
     return (
@@ -103,7 +110,7 @@ class Login extends Component {
           if (this.state.url !== '') {
             return (<WebView
               source={{uri: this.state.url}}
-              style={{marginTop: 20, width: 400, height: 750, backgroundColor: theme.color.bg}}
+              style={this.state.webViewStyle}
               onLoad={(event) => this.getAuthorizationCode(event.nativeEvent.url)}
             />);
           } else if(this.state.loading) {
@@ -140,6 +147,7 @@ const styles = StyleSheet.create({
     margin: 10,
   },
   instructions: {
+    fontSize: 18,
     textAlign: 'center',
     color: theme.color.tint,
     marginBottom: 5,
