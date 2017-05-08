@@ -6,6 +6,13 @@ Mastodon client app barebone for iOS and Android, built using [React Native](htt
 
 <img src="https://github.com/deguchi/mastobone/blob/master/src/assets/appstore/screenshot/iOS/timeline.jpg" width="320" alt="iOS screenshot"> <img src="https://github.com/deguchi/mastobone/blob/master/src/assets/appstore/screenshot/Android/timelinejp.png" width="320" alt="Android screenshot">
 
+## App
+
+iOS: now on review
+
+Android:  
+<a href='https://play.google.com/store/apps/details?id=com.mastobone&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width='200' /></a>
+
 ## Todo
 
 Federated Timeline, Follow, Notification, etc, etc,
