@@ -4,8 +4,7 @@ Mastodon client app barebone for iOS and Android, built using [React Native](htt
 
 ## ScreenShot
 
-<img src="https://github.com/deguchi/mastobone/blob/master/src/assets/appstore/screenshot/iOS/timeline.jpg" width="320" alt="iOS screenshot">
-<img src="https://github.com/deguchi/mastobone/blob/master/src/assets/appstore/screenshot/Android/timelinejp.png" width="320" alt="Android screenshot">
+<img src="https://github.com/deguchi/mastobone/blob/master/src/assets/appstore/screenshot/iOS/timeline.jpg" width="320" alt="iOS screenshot"><img src="https://github.com/deguchi/mastobone/blob/master/src/assets/appstore/screenshot/Android/timelinejp.png" width="320" alt="Android screenshot">
 
 ## Todo
 
