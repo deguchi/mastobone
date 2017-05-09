@@ -1,4 +1,4 @@
-function currentUser(state = null, action) {
+export default (state = null, action) => {
   // console.log(action);
   switch (action.type) {
     case 'CURRENT_USER_SUCCESS':
@@ -11,5 +11,3 @@ function currentUser(state = null, action) {
       return state;
   }
 }
-
-export default currentUser;

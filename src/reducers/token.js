@@ -1,4 +1,4 @@
-function token(state = null, action) {
+export default (state = null, action) => {
   // console.log(action);
   switch (action.type) {
     case 'TOKEN_SUCCESS':
@@ -11,5 +11,3 @@ function token(state = null, action) {
       return state;
   }
 }
-
-export default token;

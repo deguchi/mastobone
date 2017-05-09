@@ -1,4 +1,4 @@
-const api = (state = null, action) => {
+export default (state = null, action) => {
   // console.log(action);
   switch (action.type) {
     case 'API_INITIALIZE':
@@ -9,5 +9,3 @@ const api = (state = null, action) => {
       return state;
   }
 };
-
-export default api;

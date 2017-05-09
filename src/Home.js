@@ -17,6 +17,7 @@ import {
 import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
 import HTMLView from 'react-native-htmlview';
+import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import theme from './util/theme';
 import openBrowser from './util/openBrowser';
@@ -158,12 +159,6 @@ const Twoot = (props) => {
       borderBottomColor: theme.color.gray,
       minHeight: 60,
     },
-    span: {
-      color: theme.color.tint,
-    },
-    p: {
-      color: theme.color.shine,
-    },
     iconContainer: {
       flex: 1,
     },
@@ -183,23 +178,49 @@ const Twoot = (props) => {
       height: 200,
     }
   });
-
+  let twoot;
+  if (props.twoot.reblog) {
+    twoot = props.twoot.reblog;
+  } else {
+    twoot = props.twoot;
+  }
+  if (!twoot.content.match('<p>')) {
+    twoot.content = `<p>${twoot.content}</p>`
+  }
   return (
     <View style={style.container}>
       <View style={style.iconContainer}>
-        <Image source={{uri: props.twoot.account.avatar_static}} style={style.icon} />
+        <Image source={{uri: twoot.account.avatar_static}} style={style.icon} />
       </View>
       <View style={style.body}>
-        <Text style={style.username}>{props.twoot.account.acct}</Text>
+        <Text style={style.username}>
+          {twoot.account.acct}
+          {(() => {
+            if (props.twoot.reblog) {
+              return (<IconMaterialCommunityIcons name="twitter-retweet"
+                                 size={18}
+                                 color={theme.color.shine}
+                                 style={{ marginLeft: 100 }}
+                      />)
+            }
+          })()}
+        </Text>
         <HTMLView
-          value={props.twoot.content}
+          value={twoot.content}
           onLinkPress={(url) => openBrowser(url)}
-          stylesheet={style}
+          stylesheet={{
+            span: {
+              color: theme.color.tint,
+            },
+            p: {
+              color: theme.color.shine,
+            },
+          }}
         />
         {(() => {
           // experimental
-          if (props.twoot.extra && props.twoot.extra !== "null" && props.twoot.extra !== "{}") {
-            const extra = JSON.parse(props.twoot.extra);
+          if (twoot.extra && twoot.extra !== "null" && twoot.extra !== "{}") {
+            const extra = JSON.parse(twoot.extra);
             console.log(extra);
             const placeName = 'Hello Mastodon!';
             const zoom = 17;
