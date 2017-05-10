@@ -90,7 +90,7 @@ android {
         applicationId "com.mastobone"
         minSdkVersion 16
         targetSdkVersion 23
-        versionCode 1
+        versionCode 3
         versionName "0.0.1"
         ndk {
             abiFilters "armeabi-v7a", "x86"
