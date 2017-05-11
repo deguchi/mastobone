@@ -24,12 +24,22 @@ export default class MastodonAPI {
   setToken(token: string) {
     this.token = token;
   }
+  timeout(ms, promise) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        reject(new Error("timeout"))
+      }, ms)
+      promise.then(resolve, reject)
+    })
+  }
   createOAuthApp() {
+    console.log('createOAuthApp')
     const url = this.baseUrl +'/api/v1/apps';
     const redirectUri = 'urn:ietf:wg:oauth:2.0:oob';
 
     return new Promise((resolve, reject) => {
-      fetch(url, {
+      console.log(url)
+      this.timeout(10000, fetch(url, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -48,6 +58,10 @@ export default class MastodonAPI {
         return resolve(responseJson);
       })
       .catch((error) => {
+        return reject(error);
+      })).catch(function(error) {
+        // might be a timeout error
+        console.log(error)
         return reject(error);
       });
     });

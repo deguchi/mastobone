@@ -76,7 +76,16 @@ class Login extends Component {
       this.setState({loading:true});
       await this.props.initializeAPI(this.state.domain);
       console.log(this.props.api)
-      await this.props.api.createOAuthApp();
+      await this.props.api.createOAuthApp().catch((error) => {
+        alert('timeout error')
+        // todo
+        Actions.main();
+        this.setState({
+          url: '',
+          domain: '',
+          loading: false,
+        });
+      });
       await this.props.api.getAuthorizationUrl().then((url) => {
         this.setState({url: url});
       });
@@ -120,7 +129,8 @@ class Login extends Component {
           } else if(this.state.loading) {
             return <Spinner error={false} />;
           } else {
-            return (<View style={styles.container}>
+            console.log('login')
+            return (<View>
               <TextInput style={styles.textInput} placeholder={I18n.t('EnterDomain')}
                 onChangeText={(value) => this.setState({domain: value})}
                 autoCapitalize="none"

@@ -67,6 +67,8 @@ class Home extends Component {
   componentDidMount() {
     if (this.props.token) {
       this._fetch();
+    } else {
+      Actions.login();
     }
   }
   _fetch() {
