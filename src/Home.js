@@ -5,6 +5,7 @@
 
 import React, { Component } from 'react';
 import {
+  Alert,
   StyleSheet,
   Text,
   View,
@@ -12,6 +13,7 @@ import {
   TouchableHighlight,
   ListView,
   RefreshControl,
+  PixelRatio,
 } from 'react-native';
 
 import {connect} from 'react-redux';
@@ -19,7 +21,6 @@ import { Actions } from 'react-native-router-flux'
 import HTMLView from 'react-native-htmlview';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import IconEntypo from 'react-native-vector-icons/Entypo';
-import ToolTip from 'react-native-tooltip';
 
 import theme from './util/theme';
 import openBrowser from './util/openBrowser';
@@ -153,128 +154,173 @@ const styles = StyleSheet.create({
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 
-const Twoot = (props) => {
-  const style = StyleSheet.create({
-    container: {
-      flex: 1,
-      flexDirection: 'row',
-      padding: 10,
-      borderBottomWidth: 1,
-      borderBottomColor: theme.color.gray,
-      minHeight: 60,
-    },
-    iconContainer: {
-      flex: 1,
-    },
-    icon: {
-      width: 50,
-      height: 50,
-    },
-    username: {
-      color: theme.color.shine,
-    },
-    body: {
-      flex: 4.5,
-    },
-    map: {
-      marginTop: 10,
-      width: null,
-      height: 200,
+class Twoot extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+  render() {
+    const style = StyleSheet.create({
+      container: {
+        flex: 1,
+        flexDirection: 'row',
+        padding: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: theme.color.gray,
+        minHeight: 60,
+      },
+      iconContainer: {
+        flex: 1,
+      },
+      icon: {
+        width: 50,
+        height: 50,
+      },
+      username: {
+        color: theme.color.shine,
+      },
+      body: {
+        flex: 4.5,
+      },
+      map: {
+        marginTop: 10,
+        width: null,
+        height: 200,
+      },
+
+      // container: {
+      //   flex: 1,
+      //   justifyContent: 'center',
+      //   alignItems: 'center',
+      //   backgroundColor: '#F5FCFF',
+      // },
+
+      // textinputContainer: {
+      //   marginTop: 20,
+      //   justifyContent: 'center',
+      //   alignItems: 'center',
+      // },
+      // textinput: {
+      //   width: 60,
+      //   marginVertical: 2,
+      //   marginHorizontal: 2,
+      //   borderWidth: 1 / PixelRatio.get(),
+      //   borderRadius: 5,
+      //   borderColor: '#c7c7cc',
+      //   padding: 2,
+      //   fontSize: 14,
+      //   backgroundColor: 'white',
+      // },
+    });
+    let twoot;
+    if (this.props.twoot.reblog) {
+      twoot = this.props.twoot.reblog;
+    } else {
+      twoot = this.props.twoot;
     }
-  });
-  let twoot;
-  if (props.twoot.reblog) {
-    twoot = props.twoot.reblog;
-  } else {
-    twoot = props.twoot;
-  }
-  if (!twoot.content.match('<p>')) {
-    twoot.content = `<p>${twoot.content}</p>`
-  }
-  return (
-    <View style={style.container}>
-      <View style={style.iconContainer}>
-        <Image source={{uri: twoot.account.avatar_static}} style={style.icon} />
-      </View>
-      <View style={style.body}>
-        <Text style={style.username}>
-          {twoot.account.acct}
+    if (!twoot.content.match('<p>')) {
+      twoot.content = `<p>${twoot.content}</p>`
+    }
+    return (
+      <View style={style.container}>
+        <View style={style.iconContainer}>
+          <Image source={{uri: twoot.account.avatar_static}} style={style.icon} />
+        </View>
+        <View style={style.body}>
+          <Text style={style.username}>
+            {twoot.account.acct}
+            {(() => {
+              if (this.props.twoot.reblog) {
+                return (<IconMaterialCommunityIcons name="twitter-retweet"
+                                   size={18}
+                                   color={theme.color.shine}
+                                   style={{ marginLeft: 100 }}
+                        />)
+              }
+            })()}
+          </Text>
+          <HTMLView
+            value={twoot.content}
+            onLinkPress={(url) => openBrowser(url)}
+            stylesheet={{
+              span: {
+                color: theme.color.tint,
+              },
+              p: {
+                color: theme.color.shine,
+              },
+            }}
+          />
           {(() => {
-            if (props.twoot.reblog) {
-              return (<IconMaterialCommunityIcons name="twitter-retweet"
-                                 size={18}
-                                 color={theme.color.shine}
-                                 style={{ marginLeft: 100 }}
-                      />)
+            // experimental
+            if (twoot.extra && twoot.extra !== "null" && twoot.extra !== "{}") {
+              const extra = JSON.parse(twoot.extra);
+              console.log(extra);
+              const placeName = 'Hello Mastodon!';
+              const zoom = 17;
+              const lat = extra['lat'];
+              const lon = extra['lon'];
+              console.log(lat, lon);
+              return <TouchableHighlight onPress={() => openBrowser(`https://www.google.co.jp/maps/place/${encodeURIComponent(placeName)}/@${lat},${lon},${zoom}z/data=!4m5!3m4!1s0x6018f313a98e3861:0x580be5145020e6eb!8m2!3d35.665507!4d139.66342`)}>
+                <Image style={style.map} source={{uri: `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=${zoom}&size=280x200&maptype=roadmap&markers=color:red%7Clabel:C%7C35.665507,139.6612313&key=AIzaSyBbo4xyvaCt93zN9FmQcH0MFWQBV_0SFJU`}}/>
+              </TouchableHighlight>
             }
           })()}
-        </Text>
-        <HTMLView
-          value={twoot.content}
-          onLinkPress={(url) => openBrowser(url)}
-          stylesheet={{
-            span: {
-              color: theme.color.tint,
-            },
-            p: {
-              color: theme.color.shine,
-            },
-          }}
-        />
-        {(() => {
-          // experimental
-          if (twoot.extra && twoot.extra !== "null" && twoot.extra !== "{}") {
-            const extra = JSON.parse(twoot.extra);
-            console.log(extra);
-            const placeName = 'Hello Mastodon!';
-            const zoom = 17;
-            const lat = extra['lat'];
-            const lon = extra['lon'];
-            console.log(lat, lon);
-            return <TouchableHighlight onPress={() => openBrowser(`https://www.google.co.jp/maps/place/${encodeURIComponent(placeName)}/@${lat},${lon},${zoom}z/data=!4m5!3m4!1s0x6018f313a98e3861:0x580be5145020e6eb!8m2!3d35.665507!4d139.66342`)}>
-              <Image style={style.map} source={{uri: `https://maps.googleapis.com/maps/api/staticmap?center=${lat},${lon}&zoom=${zoom}&size=280x200&maptype=roadmap&markers=color:red%7Clabel:C%7C35.665507,139.6612313&key=AIzaSyBbo4xyvaCt93zN9FmQcH0MFWQBV_0SFJU`}}/>
+          <View style={{
+            flex: 1,flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            marginTop: 5,
+          }}>
+            <IconEntypo name="reply"
+               size={18}
+               color={theme.color.shine}
+               style={{ marginRight: 10 }}
+            />
+            {(() => {
+              if (this.props.twoot.visibility==='public' || this.props.twoot.visibility==='unlisted') {
+                return <IconEntypo name="retweet"
+                   size={18}
+                   color={theme.color.shine}
+                   style={{ marginRight: 10 }}
+                /> ;
+              } else {
+                return <IconEntypo name="lock"
+                   size={18}
+                   color={theme.color.shine}
+                   style={{ marginRight: 10 }}
+                />;
+              }
+            })()}
+              <IconEntypo name="star"
+                 size={18}
+                 color={theme.color.shine}
+                 style={{ marginRight: 10 }}
+              />
+            <TouchableHighlight style={styles.wrapper}
+              onPress={() => Alert.alert(
+                I18n.t('MoreMenu'),
+                null,
+                [
+                  {text: I18n.t('Mute'), onPress: () => console.log('Foo Pressed!')},
+                  {text: I18n.t('Block'), onPress: () => console.log('Bar Pressed!')},
+                  {text: I18n.t('Report'), onPress: () => console.log('Baz Pressed!')},
+                  {text: I18n.t('Cancel'), onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                  { cancelable: false }
+                ]
+            )}>
+              <IconEntypo name="dots-three-horizontal"
+                 size={18}
+                 color={theme.color.shine}
+                 style={{ marginRight: 10 }}
+              />
             </TouchableHighlight>
-          }
-        })()}
-        <View style={{
-          flex: 1,flexDirection: 'row',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          marginTop: 5,
-        }}>
-          <IconEntypo name="reply"
-             size={18}
-             color={theme.color.shine}
-             style={{ marginRight: 10 }}
-          />
-          {(() => {
-            if (props.twoot.visibility==='public' || props.twoot.visibility==='unlisted') {
-              return <IconEntypo name="retweet"
-                 size={18}
-                 color={theme.color.shine}
-                 style={{ marginRight: 10 }}
-              /> ;
-            } else {
-              return <IconEntypo name="lock"
-                 size={18}
-                 color={theme.color.shine}
-                 style={{ marginRight: 10 }}
-              />;
-            }
-          })()}
-          <IconEntypo name="star"
-             size={18}
-             color={theme.color.shine}
-             style={{ marginRight: 10 }}
-          />
-          <IconEntypo name="dots-three-horizontal"
-             size={18}
-             color={theme.color.shine}
-             style={{ marginRight: 10 }}
-          />
+          </View>
         </View>
       </View>
-    </View>
-  );
+    );
+
+  }
 };
 

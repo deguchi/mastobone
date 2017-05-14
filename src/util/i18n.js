@@ -16,6 +16,11 @@ I18n.translations = {
     NewTwoot: 'new Twoot',
     WhatDoing: 'What are you doing now?',
     Twoot: 'Twoot!',
+    MoreMenu: 'more menu',
+    Mute: 'Mute',
+    Block: 'Block',
+    Report: 'Report',
+    Cancel: 'Cancel',
   },
   ja: {
     Home: 'ホーム',
@@ -25,6 +30,11 @@ I18n.translations = {
     NewTwoot: '新規つぶやき',
     WhatDoing: 'いまなにしてる？',
     Twoot: 'トゥート！',
+    MoreMenu: 'メニュー',
+    Mute: 'ミュート',
+    Block: 'ブロック',
+    Report: 'レポート',
+    Cancel: 'キャンセル',
   }
 };
 
