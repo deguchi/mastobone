@@ -18,6 +18,8 @@ import {connect} from 'react-redux';
 import { Actions } from 'react-native-router-flux'
 import HTMLView from 'react-native-htmlview';
 import IconMaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import IconEntypo from 'react-native-vector-icons/Entypo';
+import ToolTip from 'react-native-tooltip';
 
 import theme from './util/theme';
 import openBrowser from './util/openBrowser';
@@ -234,6 +236,43 @@ const Twoot = (props) => {
             </TouchableHighlight>
           }
         })()}
+        <View style={{
+          flex: 1,flexDirection: 'row',
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          marginTop: 5,
+        }}>
+          <IconEntypo name="reply"
+             size={18}
+             color={theme.color.shine}
+             style={{ marginRight: 10 }}
+          />
+          {(() => {
+            if (props.twoot.visibility==='public' || props.twoot.visibility==='unlisted') {
+              return <IconEntypo name="retweet"
+                 size={18}
+                 color={theme.color.shine}
+                 style={{ marginRight: 10 }}
+              /> ;
+            } else {
+              return <IconEntypo name="lock"
+                 size={18}
+                 color={theme.color.shine}
+                 style={{ marginRight: 10 }}
+              />;
+            }
+          })()}
+          <IconEntypo name="star"
+             size={18}
+             color={theme.color.shine}
+             style={{ marginRight: 10 }}
+          />
+          <IconEntypo name="dots-three-horizontal"
+             size={18}
+             color={theme.color.shine}
+             style={{ marginRight: 10 }}
+          />
+        </View>
       </View>
     </View>
   );
