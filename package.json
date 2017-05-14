@@ -18,6 +18,7 @@
 		"react-native-router-flux": "^3.38.1",
 		"react-native-safari-view": "^2.0.0",
 		"react-native-spinkit": "^1.0.2",
+		"react-native-tooltip": "^5.0.0",
 		"react-native-vector-icons": "^4.0.1",
 		"react-redux": "^5.0.4",
 		"redux": "^3.6.0",
