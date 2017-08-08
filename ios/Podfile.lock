@@ -1,0 +1,30 @@
+PODS:
+  - React (0.41.2):
+    - React/Core (= 0.41.2)
+  - React/Core (0.41.2):
+    - React/cxxreact
+    - React/yoga
+  - React/cxxreact (0.41.2):
+    - React/jschelpers
+  - React/jschelpers (0.41.2)
+  - React/yoga (0.41.2)
+  - RNI18n (2.0.4):
+    - React
+
+DEPENDENCIES:
+  - React (from `../node_modules/react-native`)
+  - RNI18n (from `../node_modules/react-native-i18n`)
+
+EXTERNAL SOURCES:
+  React:
+    :path: ../node_modules/react-native
+  RNI18n:
+    :path: ../node_modules/react-native-i18n
+
+SPEC CHECKSUMS:
+  React: 2b10c07d947dea71c144a33764e9162ed81e3825
+  RNI18n: 904c39e59803ddeca6889548c0122f824c4c30c8
+
+PODFILE CHECKSUM: 007c6027d31c73848b2a6d5dded6a148ee00caf0
+
+COCOAPODS: 1.2.1

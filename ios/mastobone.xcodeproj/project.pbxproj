@@ -51,6 +51,8 @@
 		954A3C9B8E144D7ABC47A798 /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B6376D1FA1B448A29CD99312 /* libyoga.a */; };
 		A78DBB5765954C1899285FC4 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70DB473F8F994FA4A785FCE4 /* MaterialIcons.ttf */; };
 		AA4BB067A25C4968806C602D /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73F92C15A0304E5E89C7AFAC /* Ionicons.ttf */; };
+		BAA320F5A8334F4FA6F06331 /* libPods-mastoboneTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C3ABB1E01A27869D3B04EC94 /* libPods-mastoboneTests.a */; };
+		C67E4B205A0EB621749B09A9 /* libPods-mastobone.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D9129BB99D594D7F67D67FC2 /* libPods-mastobone.a */; };
 		D2521910B56D4C98A533F019 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 881651984C8E43CEAE80A7FA /* Foundation.ttf */; };
 		E3023CD1AAC3415DB9966F37 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 70B5819E4C1247DB9B9C6258 /* MaterialCommunityIcons.ttf */; };
 /* End PBXBuildFile section */
@@ -308,6 +310,9 @@
 		2D02E4901E0B4A5D006451C7 /* mastobone-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "mastobone-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3340847F2BF3422890BEA1DA /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		4803C424DDFB45C696E8CB9C /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		4D89B555A3E9B23AE7A388E5 /* Pods-mastobone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mastobone.release.xcconfig"; path = "Pods/Target Support Files/Pods-mastobone/Pods-mastobone.release.xcconfig"; sourceTree = "<group>"; };
+		4DB90BD615D141767B782D81 /* Pods-mastobone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mastobone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mastobone/Pods-mastobone.debug.xcconfig"; sourceTree = "<group>"; };
+		53C148836567962E672E08DE /* Pods-mastoboneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mastoboneTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mastoboneTests/Pods-mastoboneTests.release.xcconfig"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		70B5819E4C1247DB9B9C6258 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		70DB473F8F994FA4A785FCE4 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
@@ -324,6 +329,9 @@
 		BBC86AC9C4E5422993E0249B /* SafariViewManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SafariViewManager.xcodeproj; path = "../node_modules/react-native-safari-view/SafariViewManager.xcodeproj"; sourceTree = "<group>"; };
 		C110B5824043483A8D12A06C /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = "<group>"; };
 		C30DCFD676684B04A022174C /* libSafariViewManager.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libSafariViewManager.a; sourceTree = "<group>"; };
+		C3ABB1E01A27869D3B04EC94 /* libPods-mastoboneTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mastoboneTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D47BE75C52F12CE5521386B6 /* Pods-mastoboneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mastoboneTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mastoboneTests/Pods-mastoboneTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D9129BB99D594D7F67D67FC2 /* libPods-mastobone.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-mastobone.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E17511B28F994AA39B8383E6 /* libcxxreact.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libcxxreact.a; sourceTree = "<group>"; };
 		E6381189C77F411089A0459A /* libRNSpinkit.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSpinkit.a; sourceTree = "<group>"; };
 		EC40F619DD4B4FF3866EA762 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
@@ -336,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
+				BAA320F5A8334F4FA6F06331 /* libPods-mastoboneTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +370,7 @@
 				954A3C9B8E144D7ABC47A798 /* libyoga.a in Frameworks */,
 				438AA73CB2774D0685DF960C /* libcxxreact.a in Frameworks */,
 				1344BDB51E764E76A9929468 /* libjschelpers.a in Frameworks */,
+				C67E4B205A0EB621749B09A9 /* libPods-mastobone.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -552,6 +562,8 @@
 				00E356EF1AD99517003FC87E /* mastoboneTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				ECAE614B31AF4E19A75280F3 /* Resources */,
+				D117861F3D12636626496B26 /* Pods */,
+				998A588EC0988D682A94C2BD /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -566,6 +578,15 @@
 				2D02E4901E0B4A5D006451C7 /* mastobone-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		998A588EC0988D682A94C2BD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D9129BB99D594D7F67D67FC2 /* libPods-mastobone.a */,
+				C3ABB1E01A27869D3B04EC94 /* libPods-mastoboneTests.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BDC3D0E61EB99EAE006A592E /* Products */ = {
@@ -601,6 +622,17 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		D117861F3D12636626496B26 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4DB90BD615D141767B782D81 /* Pods-mastobone.debug.xcconfig */,
+				4D89B555A3E9B23AE7A388E5 /* Pods-mastobone.release.xcconfig */,
+				D47BE75C52F12CE5521386B6 /* Pods-mastoboneTests.debug.xcconfig */,
+				53C148836567962E672E08DE /* Pods-mastoboneTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		ECAE614B31AF4E19A75280F3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -625,9 +657,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "mastoboneTests" */;
 			buildPhases = (
+				0E2575E3579BAE2921091B6E /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
+				2B1476D96B13332F43747B95 /* [CP] Embed Pods Frameworks */,
+				887218212722C62AC79E70A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -643,10 +678,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "mastobone" */;
 			buildPhases = (
+				17A50D7909A36A64EDF0516E /* [CP] Check Pods Manifest.lock */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				03D69F06E9426703A0CE8C76 /* [CP] Embed Pods Frameworks */,
+				943CCB36E53E479FC8BE2C99 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1073,7 +1111,67 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		03D69F06E9426703A0CE8C76 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mastobone/Pods-mastobone-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0E2575E3579BAE2921091B6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		17A50D7909A36A64EDF0516E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		2B1476D96B13332F43747B95 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mastoboneTests/Pods-mastoboneTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 		2D02E4CB1E0B4B27006451C7 /* Bundle React Native Code And Images */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1087,7 +1185,37 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+		};
+		887218212722C62AC79E70A0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mastoboneTests/Pods-mastoboneTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		943CCB36E53E479FC8BE2C99 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mastobone/Pods-mastobone-resources.sh\"\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1156,6 +1284,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D47BE75C52F12CE5521386B6 /* Pods-mastoboneTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1193,6 +1322,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53C148836567962E672E08DE /* Pods-mastoboneTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
@@ -1227,6 +1357,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4DB90BD615D141767B782D81 /* Pods-mastobone.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1254,6 +1385,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D89B555A3E9B23AE7A388E5 /* Pods-mastobone.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
