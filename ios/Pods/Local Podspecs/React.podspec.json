@@ -1,6 +1,6 @@
 {
   "name": "React",
-  "version": "0.41.2",
+  "version": "0.47.1",
   "summary": "A framework for building native apps using React",
   "description": "React Native apps are built using the React JS\nframework, and render directly to native UIKit\nelements using a fully asynchronous architecture.\nThere is no browser and no HTML. We have picked what\nwe think is the best set of features from these and\nother technologies to build what we hope to become\nthe best product development framework available,\nwith an emphasis on iteration speed, developer\ndelight, continuity of technology, and absolutely\nbeautiful and fast products with no compromises in\nquality or capability.",
   "homepage": "http://facebook.github.io/react-native/",
@@ -8,7 +8,7 @@
   "authors": "Facebook",
   "source": {
     "git": "https://github.com/facebook/react-native.git",
-    "tag": "v0.41.2"
+    "tag": "v0.47.1"
   },
   "default_subspecs": "Core",
   "requires_arc": true,
@@ -18,38 +18,86 @@
   "pod_target_xcconfig": {
     "CLANG_CXX_LANGUAGE_STANDARD": "c++14"
   },
-  "header_dir": "React",
   "preserve_paths": [
-    "cli.js",
-    "Libraries/**/*.js",
-    "lint",
-    "linter.js",
-    "node_modules",
     "package.json",
-    "packager",
-    "PATENTS",
-    "react-native-cli"
+    "LICENSE",
+    "LICENSE-docs",
+    "PATENTS"
   ],
+  "cocoapods_version": ">= 1.2.0",
   "subspecs": [
     {
       "name": "Core",
       "dependencies": {
-        "React/yoga": [
-
-        ],
-        "React/cxxreact": [
-
+        "Yoga": [
+          "0.47.1.React"
         ]
       },
       "source_files": "React/**/*.{c,h,m,mm,S}",
       "exclude_files": [
         "**/__tests__/*",
         "IntegrationTests/*",
+        "React/DevSupport/*",
+        "React/Inspector/*",
         "React/**/RCTTVView.*",
-        "ReactCommon/yoga/*"
+        "ReactCommon/yoga/*",
+        "React/Cxx*/*",
+        "React/Base/RCTBatchedBridge.mm",
+        "React/Executors/*"
       ],
+      "header_dir": "React",
       "frameworks": "JavaScriptCore",
-      "libraries": "stdc++"
+      "libraries": "stdc++",
+      "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/ReactCommon\""
+      }
+    },
+    {
+      "name": "BatchedBridge",
+      "dependencies": {
+        "React/Core": [
+
+        ],
+        "React/cxxreact_legacy": [
+
+        ]
+      },
+      "source_files": [
+        "React/Base/RCTBatchedBridge.mm",
+        "React/Executors/*"
+      ]
+    },
+    {
+      "name": "CxxBridge",
+      "dependencies": {
+        "Folly": [
+          "2016.09.26.00"
+        ],
+        "React/Core": [
+
+        ],
+        "React/cxxreact": [
+
+        ]
+      },
+      "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
+      "private_header_files": "React/Cxx*/*.h",
+      "source_files": "React/Cxx*/*.{h,m,mm}"
+    },
+    {
+      "name": "DevSupport",
+      "dependencies": {
+        "React/Core": [
+
+        ],
+        "React/RCTWebSocket": [
+
+        ]
+      },
+      "source_files": [
+        "React/DevSupport/*",
+        "React/Inspector/*"
+      ]
     },
     {
       "name": "tvOS",
@@ -61,24 +109,65 @@
       "source_files": "React/**/RCTTVView.{h, m}"
     },
     {
+      "name": "jschelpers_legacy",
+      "source_files": [
+        "ReactCommon/jschelpers/{JavaScriptCore,JSCWrapper,InspectorInterfaces}.{cpp,h}",
+        "ReactCommon/jschelpers/systemJSCWrapper.cpp"
+      ],
+      "private_header_files": "ReactCommon/jschelpers/{JavaScriptCore,JSCWrapper,InspectorInterfaces}.h",
+      "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/ReactCommon\""
+      },
+      "frameworks": "JavaScriptCore"
+    },
+    {
+      "name": "cxxreact_legacy",
+      "dependencies": {
+        "React/jschelpers_legacy": [
+
+        ]
+      },
+      "source_files": "ReactCommon/cxxreact/{JSBundleType,oss-compat-util}.{cpp,h}",
+      "private_header_files": "ReactCommon/cxxreact/{JSBundleType,oss-compat-util}.h",
+      "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/ReactCommon\""
+      }
+    },
+    {
       "name": "jschelpers",
-      "source_files": "ReactCommon/jschelpers/{JavaScriptCore,JSCWrapper}.{cpp,h}",
-      "header_dir": "jschelpers"
+      "dependencies": {
+        "Folly": [
+          "2016.09.26.00"
+        ]
+      },
+      "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
+      "source_files": "ReactCommon/jschelpers/*.{cpp,h}",
+      "private_header_files": "ReactCommon/jschelpers/*.h",
+      "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/ReactCommon\""
+      },
+      "frameworks": "JavaScriptCore"
     },
     {
       "name": "cxxreact",
       "dependencies": {
         "React/jschelpers": [
 
+        ],
+        "boost": [
+
+        ],
+        "Folly": [
+          "2016.09.26.00"
         ]
       },
-      "source_files": "ReactCommon/cxxreact/{JSBundleType,oss-compat-util}.{cpp,h}",
-      "header_dir": "cxxreact"
-    },
-    {
-      "name": "yoga",
-      "source_files": "ReactCommon/yoga/**/*.{c,h}",
-      "header_dir": "yoga"
+      "compiler_flags": "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
+      "source_files": "ReactCommon/cxxreact/*.{cpp,h}",
+      "exclude_files": "ReactCommon/cxxreact/{JSCTracing,SampleCxxModule}.*",
+      "private_header_files": "ReactCommon/cxxreact/*.h",
+      "pod_target_xcconfig": {
+        "HEADER_SEARCH_PATHS": "\"$(PODS_TARGET_SRCROOT)/ReactCommon\" \"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/DoubleConversion\" \"$(PODS_ROOT)/Folly\""
+      }
     },
     {
       "name": "ART",
@@ -87,8 +176,7 @@
 
         ]
       },
-      "source_files": "Libraries/ART/**/*.{h,m}",
-      "preserve_paths": "Libraries/ART/**/*.js"
+      "source_files": "Libraries/ART/**/*.{h,m}"
     },
     {
       "name": "RCTActionSheet",
@@ -97,8 +185,7 @@
 
         ]
       },
-      "source_files": "Libraries/ActionSheetIOS/*.{h,m}",
-      "preserve_paths": "Libraries/ActionSheetIOS/*.js"
+      "source_files": "Libraries/ActionSheetIOS/*.{h,m}"
     },
     {
       "name": "RCTAdSupport",
@@ -107,8 +194,7 @@
 
         ]
       },
-      "source_files": "Libraries/AdSupport/*.{h,m}",
-      "preserve_paths": "Libraries/AdSupport/*.js"
+      "source_files": "Libraries/AdSupport/*.{h,m}"
     },
     {
       "name": "RCTAnimation",
@@ -117,7 +203,8 @@
 
         ]
       },
-      "source_files": "Libraries/NativeAnimation/{Drivers/*,Nodes/*,*}.{h,m}"
+      "source_files": "Libraries/NativeAnimation/{Drivers/*,Nodes/*,*}.{h,m}",
+      "header_dir": "RCTAnimation"
     },
     {
       "name": "RCTCameraRoll",
@@ -129,8 +216,7 @@
 
         ]
       },
-      "source_files": "Libraries/CameraRoll/*.{h,m}",
-      "preserve_paths": "Libraries/CameraRoll/*.js"
+      "source_files": "Libraries/CameraRoll/*.{h,m}"
     },
     {
       "name": "RCTGeolocation",
@@ -139,8 +225,7 @@
 
         ]
       },
-      "source_files": "Libraries/Geolocation/*.{h,m}",
-      "preserve_paths": "Libraries/Geolocation/*.js"
+      "source_files": "Libraries/Geolocation/*.{h,m}"
     },
     {
       "name": "RCTImage",
@@ -152,8 +237,7 @@
 
         ]
       },
-      "source_files": "Libraries/Image/*.{h,m}",
-      "preserve_paths": "Libraries/Image/*.js"
+      "source_files": "Libraries/Image/*.{h,m}"
     },
     {
       "name": "RCTNetwork",
@@ -162,8 +246,7 @@
 
         ]
       },
-      "source_files": "Libraries/Network/*.{h,m,mm}",
-      "preserve_paths": "Libraries/Network/*.js"
+      "source_files": "Libraries/Network/*.{h,m,mm}"
     },
     {
       "name": "RCTPushNotification",
@@ -172,8 +255,7 @@
 
         ]
       },
-      "source_files": "Libraries/PushNotificationIOS/*.{h,m}",
-      "preserve_paths": "Libraries/PushNotificationIOS/*.js"
+      "source_files": "Libraries/PushNotificationIOS/*.{h,m}"
     },
     {
       "name": "RCTSettings",
@@ -182,8 +264,7 @@
 
         ]
       },
-      "source_files": "Libraries/Settings/*.{h,m}",
-      "preserve_paths": "Libraries/Settings/*.js"
+      "source_files": "Libraries/Settings/*.{h,m}"
     },
     {
       "name": "RCTText",
@@ -192,8 +273,7 @@
 
         ]
       },
-      "source_files": "Libraries/Text/*.{h,m}",
-      "preserve_paths": "Libraries/Text/*.js"
+      "source_files": "Libraries/Text/*.{h,m}"
     },
     {
       "name": "RCTVibration",
@@ -202,8 +282,7 @@
 
         ]
       },
-      "source_files": "Libraries/Vibration/*.{h,m}",
-      "preserve_paths": "Libraries/Vibration/*.js"
+      "source_files": "Libraries/Vibration/*.{h,m}"
     },
     {
       "name": "RCTWebSocket",
@@ -212,8 +291,7 @@
 
         ]
       },
-      "source_files": "Libraries/WebSocket/*.{h,m}",
-      "preserve_paths": "Libraries/WebSocket/*.js"
+      "source_files": "Libraries/WebSocket/*.{h,m}"
     },
     {
       "name": "RCTLinkingIOS",
@@ -232,8 +310,18 @@
         ]
       },
       "source_files": "Libraries/RCTTest/**/*.{h,m}",
-      "preserve_paths": "Libraries/RCTTest/**/*.js",
       "frameworks": "XCTest"
+    },
+    {
+      "name": "_ignore_me_subspec_for_linting_",
+      "dependencies": {
+        "React/Core": [
+
+        ],
+        "React/CxxBridge": [
+
+        ]
+      }
     }
   ]
 }
